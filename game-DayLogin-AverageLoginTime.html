@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>每天登录的用户数</title>
+
+</head>
+<body>
+     <script src="./js/echarts/echarts.js"></script>
+	 
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px; margin-left: 100px; margin-top:150px;"></div>
+	<div id="next" style="width: 600px;height:400px;margin-left: 800px; margin-top:-400px;"></div>
+	
+	<script src="./js/echarts/westeros.js"></script>
+	  <script>
+          // 第二个参数可以指定前面引入的主题
+          var chart = echarts.init(document.getElementById('main'), 'westeros');
+          chart.setOption({
+                option
+          });
+      </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+	
+	
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+
+ var option = {
+    title: {
+        text: '每天登录用户数的折线图'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['每天的登录用户数']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['2017-01-01','2017-01-02','2017-01-03','2017-01-04','2017-01-05','2017-01-06','2017-01-07']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'每天的登录用户数',
+            type:'line',
+            stack: '总量',
+            data:[11076, 13930, 15394, 16371, 20144,26159, 24763]
+        }
+    ]
+};
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		
+		        var myChart = echarts.init(document.getElementById('next'));
+
+		
+		var option = {
+            
+			title: {
+        text: '次均登录时长表'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['次均登录时长']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ["2017-01-01","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2017-01-07"]
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'次均登录时长',
+            type:'line',
+            data:[24416,24395,24342,24537,24458,24528,24521]
+        },
+
+    ]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
