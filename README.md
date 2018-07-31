@@ -1,2 +1,4 @@
 # WebDataDisplay
-用于数据统计分析结果的前端展示
+> 用于undefined团队大数据课程的数据分析结果的展示
+
+### 主人很懒，README之后补
