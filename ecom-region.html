@@ -14,11 +14,18 @@
 </head>
 
 <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">电商平台数据分析</a>
+        <a><cite>区域分布</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
     <div class="x-body">
         <div id="china-map"></div>
     </div>
-
-
     <!-- 统一引用js -->
     <script src="./js/common/commonJS.js"></script>
     <script src="./js/echarts/china.js"></script>
@@ -103,6 +110,7 @@
                 name: '消费总额',
                 type: 'map',
                 mapType: 'china',
+                zoom:0.85,
                 roam: false, //是否开启鼠标缩放和平移漫游
                 itemStyle: { //地图区域的多边形 图形样式
                     normal: { //是图形在默认状态下的样式

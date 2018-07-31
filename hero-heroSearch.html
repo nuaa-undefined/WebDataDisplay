@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/common/commonHead.js"></script>
+    <title>hero查询</title>
+</head>
+<body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">游戏日志数据分析</a>
+        <a><cite>英雄信息查询</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body layui-anim layui-anim-up">
+        <div class="layui-row">
+            <form class="layui-form">
+                <div class="layui-input-inline">
+                    <input type="tel" name="keyword" autocomplete="off"     placeholder="英雄名称" class="layui-input">
+                </div>
+                <button class="layui-btn" id="searchEmailCompany" data-type="reload">
+                    <i class="layui-icon" style="font-size: 20px; "></i> 查询
+                </button>
+            </form>
+        </div>
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>英雄名称</th>
+            <th>使用次数</th>
+            <th>使用比例</th>
+            <th>获胜次数</th>
+            <th>获胜比例</th>
+            <td>最常分路</td>
+            <td>该分路占比</td>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alistar</td>
+            <td>436</td>
+            <td>4.36%</td>
+            <td>221</td>
+            <td>50.69%</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="./js/common/commonJS.js"></script>  
+    <!-- 统一引用js -->
+</body>
+</html>
