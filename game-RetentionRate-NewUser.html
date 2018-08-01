@@ -28,30 +28,30 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body">
-                            <div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 120%; height: 90px;">
+                            <div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 90px;">
                                 <div carousel-item="" id='info-card'>
                                     <ul class="layui-row layui-col-space10 layui-this">
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>平均留存率</h3>
                                                 <p><cite>29.15%</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>平均新用户数</h3>
                                                 <p><cite>3698</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>最高留存率 2017-01-02 </h3>
                                                 <p><cite>47.87%</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>最高新用户数 2017-01-02 </h3>
+                                                <h3>七天内最高新用户数 </h3>
                                                 <p><cite>5835</cite></p>
                                             </a>
                                         </li>
@@ -143,41 +143,52 @@
                         </script>
                         <script type = "text/javascript">
                             var myChart = echarts.init(document.getElementById('NewUser'));                  
-	                      	var option = {
-                                      tooltip: {
-                                                trigger: 'axis'
+                             
+                           var option = {
+						             color:["#59c4e6"],
+                                     tooltip : {
+                                              trigger: 'axis',
+                                         },
+                                     grid: {
+                                              left: '3%',
+                                              right: '4%',
+                                              bottom: '3%',
+                                              containLabel: true
                                         },
-                                      legend: {
-                                                data:['每天的新用户数']
-                                        },
-                                      grid: {
-                                                left: '3%',
-                                                right: '4%',
-                                                bottom: '3%',
-                                                containLabel: true
-                                        },
-                                      toolbox: {
-                                            feature: {
-                                                         saveAsImage: {}
-                                                 }
-                                        },
-                                      xAxis: {
-                                               type: 'category',
-                                               boundaryGap: false,
-                                               data: ["2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2017-01-07"]
-                                        },
-                                      yAxis: {
-                                              type: 'value'
-                                        },
-                                      series: [
+                                      xAxis : [
                                                 {
-                                                   name:'每天的新用户数',
-                                                   type:'line',
-                                                    data:[5835, 2582, 1841, 4432,5804, 1696]
+                                              type : 'category',
+                                              data: ["2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2017-01-07"],
+                                              axisTick: {
+                                                  alignWithLabel: true
+                                                }
+                                            }
+                                        ],
+                                     yAxis : [
+                                              {
+                                                  type : 'value'
+                                               }
+                                         ],
+                                     series : [
+                                                {
+                                                  name:'新用户数',
+                                                  type:'bar',
+                                                  barWidth: '60%',
+                                                  data:[5835, 2582, 1841, 4432,5804, 1696],           
+                                                  markPoint : {
+                                                             data : [
+                                                                       {type : 'max', name: '最大值'},
+                                                                       {type : 'min', name: '最小值'}
+                                                                     ] 
+                                                             },
+                                                  markLine : {
+                                                             data : [
+                                                                      {type : 'average', name: '平均值'}
+                                                                    ]
+                                                            }
                                                  }
-
-                                            ]
-                                };
+                                        ]
+                             };
                             myChart.setOption(option);
                         </script>       
                     </div>
