@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/common/commonHead.js"></script>
+    <title>电商用户行为分析</title>
+</head>
+<body>
+      <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">电商平台数据分析</a>
+        <a><cite>用户行为分析</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div> 
+    <div class="x-body layui-anim layui-anim-up">
+        <!-- <fieldset class="layui-elem-field">
+        <legend>用户行为</legend>
+        <div class="layui-field-box">
+            <p>&nbsp;&nbsp;&nbsp;这里你能看到用户的活跃度，总消费金额，单笔最高消费金额的排行榜，购物车放弃率等用户行为数据</p>
+            <br>
+        </div>
+        </fieldset> -->
+        <blockquote class="layui-elem-quote">
+            <p>&nbsp;&nbsp;&nbsp;这里你能看到用户的活跃度，总消费金额，单笔最高消费金额的排行榜，购物车放弃率等用户行为数据</p>
+        </blockquote>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>用户消费总额top10</h3></div>
+                <div class="layui-card-body" >
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>用户ID</th>
+                            <th>性别</th>
+                            <th>总消费额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>71c7495e-9ee6-4a1f-9b21-402fc2b49c49</td>
+                            <td>男</td>
+                            <td>370256.13</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>女</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>                           
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>                            
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        </tbody>
+                    </table>      
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>单笔消费top10</h3></div>
+                <div class="layui-card-body">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>用户ID</th>
+                            <th>性别</th>
+                            <th>单笔消费额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>71c7495e-9ee6-4a1f-9b21-402fc2b49c49</td>
+                            <td>男</td>
+                            <td>370256.13</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>女</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>                           
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>                            
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>男</td>
+                            <td>370165.73</td>
+                        </tr>
+                        </tbody>
+                    </table>   
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md8">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>购物车放弃率</h3></div>
+                <div class="layui-card-body" >
+                    <div  id="cartAbandon" style="width: 100%; height:400px;">        
+                    </div> 
+                </div>
+            </div>
+            </div>
+             <div class="layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>数据分析</h3></div>
+                <div id="cartAbandonAnalyse" style="width: 100%; height:400px;">
+                </div>
+                <div class="layui-card-body">
+                </div>
+            </div>
+            </div> 
+             <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>用户活跃度（交易次数）top10</h3></div>
+                <div class="layui-card-body" >
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>排名</th>
+            <th>用户ID</th>
+            <th>性别</th>
+            <th>归属省级行政区</th>
+            <th>总消费金额</th>
+            <th>活跃度（交易次数）</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>4fccb68f-b4c6-4c09-91a1-b27af56071bd</td>
+            <td>女</td>
+            <td>710000</td>
+            <td>25278.12</td>
+            <td>25</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>895d8776-16c8-4823-811d-bf74555e7842</td>
+            <td>女</td>
+            <td>440000</td>
+            <td>50775.51</td>
+            <td>24</td>
+          </tr>
+        </tbody>
+      </table>
+                </div>
+            </div>
+            </div> 
+        </div>
+        </div> 
+    </div>
+
+    <script src="./js/common/commonJS.js"></script>  
+     <script type = "text/javascript">
+        var myChart = echarts.init(document.getElementById('cartAbandon'), 'westeros');
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },  
+            legend: {
+                data:['总交易次数','总失败次数','购物车放弃率']
+            },
+            grid:{
+                x:100,
+                y:70,
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018'],
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '交易次数',
+                },
+                {
+                    type: 'value',
+                    name: '放弃率',
+                    min: 0,
+                    max: 100,
+                    axisLabel: {
+                        formatter: '{value} %'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name:'总交易次数',
+                    type:'line',
+                    data:[7021, 7146, 7037, 7129, 7135, 7059, 7025,7081,7085,7041,7162,7157,7243,6952,731]
+                },
+                {
+                    name:'购物车放弃率',
+                    type:'bar',
+                    yAxisIndex: 1,
+                    data:[67.42,66.62,67.12,66.04,65.63,66.68,66.86,67.15,67.09,66.74,67.08,65.95,66.65,67.32,65.53]
+                },
+                {
+                    name:'总失败次数',
+                    type:'line',
+                    data:[4734,4761,4723,4708,4683,4707,4697,4755,4753,4699,4804,4720,4828,4680,479]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>   
+</body>
+</html>
