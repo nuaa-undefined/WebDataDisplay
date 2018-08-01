@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/common/commonHead.js"></script>
+    <title>电商时间分布(月份)</title>
+</head>
+<body>
+    <div class="x-body layui-anim layui-anim-up">
+        <fieldset class="layui-elem-field">
+            <legend>月份消费分布</legend>
+            <div class="layui-field-box">
+                <p>&nbsp;&nbsp;&nbsp;这里你将看到2004-2018年度各个月份消费分布。</p>
+                <br>
+            </div>
+        </fieldset> 
+        <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md8">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>订单数、成交率月分布</h3></div>
+                <div class="layui-card-body" >
+                    <div  id="mouthTotalNum" style="width: 100%; height:400px;">        
+                    </div> 
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>数据分析</h3></div>
+                <div class="layui-card-body">
+                    <div id="mouthTotalNumAnalyse" style="width: 100%; height:400px;">    
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>  
+    </div>
+    <script src="./js/common/commonJS.js"></script>  
+     <script type = "text/javascript">
+        var myChart = echarts.init(document.getElementById('mouthTotalNum'), 'westeros');
+        option = {
+            dataset: {
+                source: [
+                    ['score', 'amount', 'product'],
+                    [24.99, 8369, '12月'],
+                    [25.74, 8078, '11月'],
+                    [25.41, 8567, '10月'],
+                    [24.41, 8127, '9月'],
+                    [25.32, 8486, '8月'],
+                    [24.74, 8445, '7月'],
+                    [24.59, 8247, '6月'],
+                    [25.13, 8419, '5月'],
+                    [24.64, 8187, '4月'],
+                    [25.22, 8344, '3月'],
+                    [25.25, 7880, '2月'],
+                    [24.58, 8855, '1月'],
+                ]
+            },
+            grid: {
+                right:'12%',
+                bottom: '20%',//距离下边的距离
+                top: '10%' 
+                }, 
+            xAxis: {
+                name: '总订单数',
+                nameTextStyle:{
+                    fontSize:14,
+                    color: "#516b91",
+                    fontWeight:'bold',
+                    padding: [0, 0, 5, 5]
+                },   
+            },
+            yAxis: {
+                name: '月份',
+                nameTextStyle:{
+                    fontSize:16,
+                    color: "#516b91",
+                    fontWeight:'bold',
+                    padding: [0, 0, 5, 5]
+                },
+                type: 'category'
+            },
+            visualMap: {
+                orient: 'horizontal',
+                left: '25%',
+                min: 24,
+                max: 26,
+                text: ['高成交率（百分比）', '低成交率'],
+                // Map the score column to color
+                dimension: 0,
+                inRange: {
+                    color: ['#59c4e6', '#edafda'],
+                },
+                bottom:'3%',
+            },
+            series: [
+                {
+                    type: 'bar',
+                    encode: {
+                        // Map the "amount" column to X axis.
+                        x: 'amount',
+                        // Map the "product" column to Y axis
+                        y: 'product'
+                    },
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>  
+</body>
+</html>
