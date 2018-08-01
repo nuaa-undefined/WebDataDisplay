@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/common/commonHead.js"></script>
+    <title>topN查询</title>
+</head>
+<body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">游戏日志数据分析</a>
+        <a><cite>用户topN信息查询</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body layui-anim layui-anim-up">
+        <div class="layui-row">
+            <form class="layui-form">
+                <div class="layui-input-inline">
+                    <input type="tel" name="keyword" autocomplete="off"     placeholder="想显示的前N个" class="layui-input">
+                </div>
+                <button class="layui-btn" id="searchEmailCompany" data-type="reload">
+                    <i class="layui-icon" style="font-size: 20px; "></i> 查询
+                </button>
+            </form>
+        </div>
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>用户名称</th>
+            <th>登陆时长</th>
+            <th>登录次数</th>
+            <th>首登时间</th>                                                                             
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1c0f9309-390c-40ab-9aac-69dc316c94b5</td>
+            <td>542695</td>
+            <td>21</td>
+            <td>2017-01-05T00:26:17</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="./js/common/commonJS.js"></script>  
+    <!-- 统一引用js -->
+</body>
+</html>
