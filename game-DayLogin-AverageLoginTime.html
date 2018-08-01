@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./js/common/commonHead.js"></script>
-    <title>用户登录信息展示</title>
+    <title>用户信息展示</title>
 </head>
 <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
         <a href="">游戏日志数据分析</a>
-        <a><cite>用户登录信息展示</cite></a>
+        <a><cite>用户信息展示</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
@@ -23,7 +23,7 @@
     <div class="x-body layui-anim layui-anim-up">
         <script src="./js/common/commonJS.js"></script>   
       <fieldset class="layui-elem-field"> 
-            <legend>用户登录信息提要</legend>
+            <legend>用户行为分析</legend>
             <div class="layui-field-box">
                 <div class="layui-col-md12">
                     <div class="layui-card">
@@ -129,7 +129,14 @@
                 <div class="layui-card-body">
                     <div id="SystemType" style="width: 100%; height:400px;">   
 
-                        <script type = "text/javascript">
+                   
+						<script> 
+                            var chart = echarts.init(document.getElementById('SystemType'), 'westeros');
+                            chart.setOption({
+                                option
+                            });
+                    </script> 
+					     <script type = "text/javascript">
                             var myChart = echarts.init(document.getElementById('SystemType'));	
 	                      	var option = {
                                      tooltip : {
