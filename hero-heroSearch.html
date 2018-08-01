@@ -18,42 +18,165 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body layui-anim layui-anim-up">
-        <div class="layui-row">
-            <form class="layui-form">
-                <div class="layui-input-inline">
-                    <input type="tel" name="keyword" autocomplete="off"     placeholder="英雄名称" class="layui-input">
+        <blockquote class="layui-elem-quote">
+            <p>&nbsp;&nbsp;&nbsp;在这里，你可以通过检索英雄名称，展示英雄基本信息，同时查看该英雄大神玩家*3，在在分路中的出现率及胜率</p>
+        </blockquote>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-row" style="margin-bottom : 20px;">
+                        <form class="layui-form">
+                            <div class="layui-input-inline">
+                                <input type="tel" name="keyword" autocomplete="off"     placeholder="英雄名称" class="layui-input">
+                            </div>
+                            <button class="layui-btn" id="searchEmailCompany" data-type="reload">
+                                <i class="layui-icon" style="font-size: 20px; "></i> 查询
+                            </button>
+                        </form>
+                    </div>
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>英雄名称</th>
+                            <th>使用次数</th>
+                            <th>使用比例</th>
+                            <th>获胜次数</th>
+                            <th>获胜比例</th>
+                            <td>最常分路</td>
+                            <td>该分路占比</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Alistar</td>
+                            <td>436</td>
+                            <td>4.36%</td>
+                            <td>221</td>
+                            <td>50.69%</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <button class="layui-btn" id="searchEmailCompany" data-type="reload">
-                    <i class="layui-icon" style="font-size: 20px; "></i> 查询
-                </button>
-            </form>
+            </div>
+            </div>
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>该英雄分路信息</h3></div>
+                <div class="layui-card-body">
+                    <div id="heroPosition" style="width: 100%; height:400px;">    
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>该英雄大神玩家</h3></div>
+                <div class="layui-card-body">
+                    <div id="heroTopUsers" style="width: 100%; height:400px;">  
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>玩家ID</th>
+                            <th>获胜次数</th>
+                            <th>获胜比例</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>436</td>
+                            <td>221</td>
+                            <td>50.69%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>436</td>
+                            <td>221</td>
+                            <td>50.69%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>436</td>
+                            <td>221</td>
+                            <td>50.69%</td>
+                        </tr>                
+                        </tbody>
+                    </table>  
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>英雄名称</th>
-            <th>使用次数</th>
-            <th>使用比例</th>
-            <th>获胜次数</th>
-            <th>获胜比例</th>
-            <td>最常分路</td>
-            <td>该分路占比</td>
-        </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Alistar</td>
-            <td>436</td>
-            <td>4.36%</td>
-            <td>221</td>
-            <td>50.69%</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+        </div> 
+
     </div>
     <script src="./js/common/commonJS.js"></script>  
-    <!-- 统一引用js -->
+     <script type = "text/javascript">
+        var myChart = echarts.init(document.getElementById('heroPosition'), 'westeros');
+        option = {
+            tooltip: {
+                trigger: 'axis',
+            },
+            legend: {
+                x: 'center',
+                data:['使用率','胜率']
+            },
+            radar: [
+                {
+                    indicator: [
+                        {text: '上单', max: 100},
+                        {text: '中单', max: 100},
+                        {text: '打野', max: 100},
+                        {text: 'ADC', max: 100},
+                        {text: '辅助', max: 100},
+                    ],
+                    center: ['25%','50%'],
+                    radius: 80
+                },
+                {
+                    indicator: [
+                        {text: '上单', max: 100},
+                        {text: '中单', max: 100},
+                        {text: '打野', max: 100},
+                        {text: 'ADC', max: 100},
+                        {text: '辅助', max: 100},
+                    ],
+                    radius: 80,
+                    center: ['75%','50%'],
+                },
+            ],
+            series: [
+                {
+                    type: 'radar',
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                    data: [
+                        {
+                            value: [60,73,85,40],
+                            name: '使用率'
+                        }
+                    ]
+                },
+                {
+                    type: 'radar',
+                    radarIndex: 1,
+                    data: [
+                        {
+                            value: [85, 90, 90, 95, 95],
+                            name: '胜率'
+                        },
+                    ]
+                },
+            ]
+        };
+        myChart.setOption(option);
+    </script>    
 </body>
 </html>
