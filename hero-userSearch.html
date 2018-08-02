@@ -61,6 +61,16 @@
                 </div>
             </div>
             </div>
+            <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>玩家英雄列表</h3></div>
+                    <div id="heroList" style="padding-left:15px;padding-right:15px">    
+                         <table class="layui-hide" id="test"></table>
+                    </div>
+                <div class="layui-card-body">
+                </div>
+            </div>
+            </div>
             <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header"><h3>玩家分路信息</h3></div>
@@ -175,6 +185,29 @@
             ]
         };
         myChart.setOption(option);
-    </script>    
+    </script>  
+    <script>
+        layui.use('table', function(){
+        var table = layui.table;
+        
+        table.render({
+            elem: '#test'
+            ,url:'/demo/table/user/'
+            ,cols: [[
+            {field:'heronName',title: '英雄名', sort: true}
+            ,{field:'useNum',title: '使用次数', sort: true}
+            ,{field:'useRate', title: '使用率'}
+            ,{field:'winNum', title: '获胜次数', sort: true}
+            ,{field:'winRate', title: '获胜率', sort: true}
+            ,{field:'Oftenposition',  title: '最常分路'}
+            ,{field:'positionRate', title: '分路占比'}
+            ,{field:'positionWinRate',  title: '分路胜率'}
+            ]]
+            ,page: true
+        });
+        });
+    </script>
+
+  
 </body>
 </html>
