@@ -4,37 +4,78 @@
 <head>
     <title>区域分布</title>
     <script src="./js/common/commonHead.js"></script>
-    <style>
-        #china-map {
-            width: 1000px;
-            height: 1000px;
-            margin: auto;
-        }
-    </style>
 </head>
 
 <body>
     <div class="x-nav">
-      <span class="layui-breadcrumb">
+        <span class="layui-breadcrumb">
         <a href="">首页</a>
         <a href="">电商平台数据分析</a>
         <a><cite>区域分布</cite></a>
       </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-        <div id="china-map"></div>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <h3>全国各省级行政区消费分布</h3>
+                    </div>
+                    <div class="layui-card-body">
+                        <div id="china-map" style="width:100%;height:600px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>各省级行政区消费分布占比</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="percent_chart" style="width:100%;height:400px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>2004-2018各主要地区总消费额折线图</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="area-year-chart" style="width:100%;height:400px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <h3>各地区的平均消费水平</h3>
+                    </div>
+                    <div class="layui-card-body">
+                        <div id="area-avg-chart" style="width:100%;height:400px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- 统一引用js -->
     <script src="./js/common/commonJS.js"></script>
     <script src="./js/echarts/china.js"></script>
     <script>
-        var myChart = echarts.init(document.getElementById('china-map'), 'westero');
+        var myChart = echarts.init(document.getElementById('china-map'), 'westeros');
         var option = {
             title: {
                 text: '消费分布',
                 subtext: '简单测试',
+                top: '1%',
                 x: 'center'
             },
             tooltip: { //提示框组件。
@@ -82,7 +123,8 @@
                 show: true,
                 orient: 'vertical', //工具栏 icon 的布局朝向
                 x: 'right',
-                y: 'center',
+                y: 'bottom',
+                itemSize: 18,
                 feature: { //各工具配置项。
                     mark: {
                         show: true
@@ -90,28 +132,24 @@
                     dataView: {
                         show: true,
                         readOnly: false
+                            // icon: 'iamge://images/edit.png'
                     }, //数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
                     restore: {
                         show: true
+                            // icon: 'iamge://images/refresh.png'
                     }, //配置项还原。
                     saveAsImage: {
                         show: true
+                            // icon: 'image://images/save.png'
                     } //保存为图片。
-                }
-            },
-            roamController: { //控制地图的上下左右放大缩小 图上没有显示
-                show: true,
-                x: 'right',
-                mapTypeControl: {
-                    'china': true
                 }
             },
             series: [{
                 name: '消费总额',
                 type: 'map',
                 mapType: 'china',
-                zoom:0.85,
-                roam: false, //是否开启鼠标缩放和平移漫游
+                //    zoom: 0.85,
+                roam: true, //是否开启鼠标缩放和平移漫游
                 itemStyle: { //地图区域的多边形 图形样式
                     normal: { //是图形在默认状态下的样式
                         label: {
@@ -127,7 +165,7 @@
                         }
                     }
                 },
-                top: "3%", //组件距离容器的距离
+                top: "6%", //组件距离容器的距离
                 data: [{
                     name: '北京',
                     value: Math.round(Math.random() * 2000)
@@ -234,11 +272,70 @@
             }]
         };
         myChart.setOption(option);
-        myChart.on('mouseover', function(params) {
+        myChart.on('click', function(params) {
             var dataIndex = params.dataIndex;
             console.log(params);
         });
+
+        percent_option = {
+            title: {
+                text: '',
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                y: '20%',
+                data: ['北京市', '上海市', '江苏省', '浙江省', '福建省', '天津市', '其他']
+            },
+            series: [{
+                name: '消费占比',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '50%'],
+                data: [{
+                    value: 1100,
+                    name: '北京市'
+                }, {
+                    value: 1000,
+                    name: '上海市'
+                }, {
+                    value: 2000,
+                    name: '江苏省'
+                }, {
+                    value: 1600,
+                    name: '浙江省'
+                }, {
+                    value: 1400,
+                    name: '福建省'
+                }, {
+                    value: 1000,
+                    name: '天津市'
+                }, {
+                    value: 3000,
+                    name: '其他'
+                }].sort(function(a, b) {
+                    return b.value - a.value;
+                }),
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+        percent_chart = echarts.init(document.getElementById('percent_chart'), 'westeros');
+        percent_chart.setOption(percent_option);
     </script>
+    <script src="./js/ecommerce-charts/area-year-chart.js"></script>
+    <script src="./js/ecommerce-charts/area-avg-chart.js"></script>
 </body>
 
 </html>
