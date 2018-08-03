@@ -270,7 +270,8 @@ xblock{
     cursor: pointer;
 }
 .layui-nav .layui-nav-child a{
-    color: #333;
+    /* color: #333; */
+    color:rgba(255,255,255,.7);
     cursor: pointer;
 }
 .left-nav{
@@ -358,7 +359,7 @@ xblock{
 }
 .page-content{
     position: absolute;
-    top: 46px;
+    top: 46px; 
     right: 0;
     bottom: 42px;
     left: 221px;

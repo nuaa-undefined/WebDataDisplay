@@ -420,7 +420,7 @@
         option = {
             tooltip: {
                 trigger: 'item',
-                formatter: "{a} <br/>{b}: <br/>{c} ({d}%)"
+                formatter: "{b}: <br/>{c} ({d}%)"
             },
             legend: {
                 orient: 'vertical',
@@ -455,7 +455,7 @@
                     radius: ['50%', '75%'],
                     label: {
                         normal: {
-                            formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：\n}{c}  {per|{d}%} \n ',
+                            formatter: '{b}：\n{c}  {per|{d}%} \n ',
                             backgroundColor: '#eee',
                             borderColor: '#aaa',
                             borderWidth: 1,
@@ -564,7 +564,7 @@
             ]
         };
         myChart.setOption(option);
-    </script>
+    </script>   
      <script type = "text/javascript">
         var myChart = echarts.init(document.getElementById('mouthNumScale'), 'westeros');
         option = {
