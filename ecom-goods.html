@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/common/commonHead.js"></script>
+    <title>电商-商品</title>
+</head>
+<body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">电商平台数据分析</a>
+        <a><cite>商品数据概览</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>  
+    <div class="x-body layui-anim layui-anim-up">
+        <!-- <blockquote class="layui-elem-quote">
+            该页面暂未完成
+        </blockquote> -->
+        <fieldset class="layui-elem-field"style="margin-bottom: 20px">
+        <legend>商品数据</legend>
+        <div class="layui-field-box">
+            <p>&nbsp;&nbsp;&nbsp;这里你将看到商品的销售情况概述，包括畅销商品排行等</p>
+            <br>
+        </div>
+        </fieldset>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>男性用户畅销商品排行</h3></div>
+                <div class="layui-card-body" >
+                    <div  id="manTopGoods" style="width: 100%; height:400px;">
+       
+                    </div> 
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>女性用户畅销商品排行</h3></div>
+                <div class="layui-card-body">
+                    <div id="femaleTopGoods" style="width: 100%; height:400px;">   
+   
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>商品销量top10</h3></div>
+                <div class="layui-card-body">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>商品ID</th>
+                            <th>消费单数</th>
+                            <th>销量占比</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>71c7495e-9ee6-4a1f-9b21-402fc2b49c49</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        </tbody>
+                    </table>   
+                </div>
+            </div>
+            </div>
+            <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>商品放弃率top10</h3></div>
+                <div class="layui-card-body" >
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>商品ID</th>
+                            <th>放弃单数</th>
+                            <th>该商品放弃率</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>71c7495e-9ee6-4a1f-9b21-402fc2b49c49</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>52c2f9da-2759-4f44-9782-8ee62e9acf54</td>
+                            <td>3</td>
+                            <td>20%</td>
+                        </tr>
+                        </tbody>
+                    </table>      
+                </div>
+            </div>
+            </div>
+        </div> 
+    </div>
+    <!-- 统一引用js -->
+    <script src="./js/common/commonJS.js"></script>
+	<script type="text/javascript">
+		var manTop = echarts.init(document.getElementById('manTopGoods'));
+
+		var dataAxis = [ '1','2','3','4','5','6','7','8','9','10'];
+		var data = [ 50.69, 48.87, 46.76, 51.51, 51.04, 49.08, 51.17, 53.39,
+				55.25, 52.38, 49.06, 52.27, 51.16, 53.33, 48.79, 52.58, 47.34,
+				50.31, 45.38, 51.94, 48.99 ];
+		var yMax = 60;
+		var dataShadow = [];
+
+		for (var i = 0; i < data.length; i++) {
+			dataShadow.push(yMax);
+		}
+
+		option = {
+			// title: {
+			//     text: '各英雄的胜率',
+			// },
+			tooltip : {
+				trigger : 'item',
+				formatter : '{b}<br>{c}%'
+			},
+
+			xAxis : {
+				data : dataAxis,
+				axisTick : {
+					show : false
+				},
+				spliltLine : {
+					show : true
+				},
+				z : 30
+			},
+			yAxis : [ {
+				type : 'value',
+				axisLabel : {
+					show : true,
+					interval : 'auto',
+					formatter : '{value} %'
+				},
+				show : true
+			} ],
+			dataZoom : [
+					{
+						type : 'inside',
+					},
+					{
+						type : 'slider',
+						show : true,
+						handleSize : 20,
+						height : 10,
+						fillerColor : new echarts.graphic.LinearGradient(1, 0,
+								0, 0, [ {
+									//给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
+									//给第一个设置0，第四个设置1，就是垂直渐变
+									offset : 0,
+									color : '#1eb5e5'
+								}, {
+									offset : 1,
+									color : '#516b91'
+								} ]),
+						backgroundColor : '#ddd',
+						start : 30,
+						end : 60,
+					} ],
+			series : [ {
+				type : 'bar',
+				itemStyle : {
+					normal : {
+						color : [ "#59c4e6" ]
+					},
+					emphasis : {
+						color : new echarts.graphic.LinearGradient(0, 0, 0, 1,
+								[ {
+									offset : 0,
+									color : '#2378f7'
+								}, {
+									offset : 0.6,
+									color : '#2378f7'
+								}, {
+									offset : 1,
+									color : '#83bff6'
+								} ])
+					}
+				},
+				data : data
+			} ]
+		};
+		manTop.setOption(option);
+	</script>
+	<script type="text/javascript">
+		var femaleTop = echarts.init(document.getElementById('femaleTopGoods'),
+				'westeros');
+
+		option = {
+			tooltip : {
+				trigger : 'item',
+				formatter : "{b} : ({d}%)"
+			},
+
+			series : [ {
+				name : '访问来源',
+				type : 'pie',
+				radius : '65%',
+				center : [ '50%', '50%' ],
+				data : [ {
+					value : 509,
+					name : '1'
+				}, {
+					value : 497,
+					name : '2'
+				}, {
+					value : 494,
+					name : '3'
+				}, {
+					value : 491,
+					name : '4'
+				}, {
+					value : 489,
+					name : '5'
+				}, {
+					value : 520,
+					name : '6'
+				}, {
+					value : 489,
+					name : '7'
+				}, {
+					value : 489,
+					name : '8'
+				}, {
+					value : 489,
+					name : '9'
+				}, {
+					value : 489,
+					name : '10'
+				}, 
+                ].sort(function(a, b) {
+					return a.value - b.value;
+				}),
+
+				animationType : 'scale',
+				animationEasing : 'elasticOut',
+				animationDelay : function(idx) {
+					return Math.random() * 200;
+				}
+			} ]
+		};
+		femaleTop.setOption(option);
+	</script>
+</body>
+
+</html>
