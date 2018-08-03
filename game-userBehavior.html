@@ -31,12 +31,6 @@
                             <div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 90px;">
                                 <div carousel-item="" id='info-card'>
                                     <ul class="layui-row layui-col-space10 layui-this">
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>不同系统活跃用户对比</h3>
-                                                <p><cite>7:3</cite></p>
-                                            </a>
-                                        </li>
 										<li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>平均活跃用户数</h3>
@@ -67,6 +61,12 @@
                                                 <p><cite>2017-01-06</cite></p>
                                             </a>
                                         </li>
+										<li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>用户最多登陆天数</h3>
+                                                <p><cite>0</cite></p>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -77,113 +77,6 @@
         </fieldset> 
         <div style="padding: 20px; background-color: #F2F2F2;">
         <div class="layui-row layui-col-space15">
-            <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>不同系统的活跃用户数对比（七天中登陆2天以上为活跃）</h3></div>
-                <div class="layui-card-body">
-                    <div id="EachSystemUser" style="width: 100%; height:400px;">   
-                    <script> 
-                            var chart = echarts.init(document.getElementById('EachSystemUser'), 'westeros');
-                            chart.setOption({
-                                option
-                            });
-                    </script> 
-					    
-                        <script type = "text/javascript">
-                            var myChart = echarts.init(document.getElementById('EachSystemUser'));
-
-                            option = {
-                                 tooltip : {
-                                   trigger: 'item',
-                                   formatter: "{a} <br/>{b} : {c} ({d}%)"
-                                },
-                                legend: {
-                                   orient: 'vertical',
-                                   left: 'left',
-                                   data: ['iOS活跃用户数','Android活跃用户数']
-                                },
-                                series : [
-                                {
-                                   name: '活跃数',
-                                   type: 'pie',
-                                   radius : '55%',
-                                   center: ['50%', '60%'],
-                                   data:[
-								     {value:15002, name:'iOS活跃用户数'},
-                                     {value:6343, name:'Android活跃用户数'}
-                                   ],
-		                           itemStyle: {
-                                     emphasis: {
-                                       shadowBlur: 10,
-                                       shadowOffsetX: 0,
-                                       shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                    }
-                                   }
-  
-                                }
-                                ]
-                            };
-                            myChart.setOption(option);
-                        </script>       
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>每天活跃用户数（每天登录次数多于三次为活跃）</h3></div>
-                <div class="layui-card-body">
-                    <div id="ActiveUser" style="width: 100%; height:400px;">   
-					<script> 
-                            var chart = echarts.init(document.getElementById('ActiveUser'), 'westeros');
-                            chart.setOption({
-                                option
-                            });
-                    </script> 
-
-                        <script type = "text/javascript">
-                            var myChart = echarts.init(document.getElementById('ActiveUser'));                  
-	                      	var option = {
-                               tooltip: {
-                                 trigger: 'axis'
-                               },
-                               legend: {
-                                 data:['每天活跃用户']
-                               },
-                               grid: {
-                                  left: '3%',
-                                  right: '4%',
-                                  bottom: '3%',
-                                  containLabel: true
-                               },
-                               toolbox: {
-                                 feature: {
-                                   saveAsImage: {}
-                                 }
-                               },
-                               xAxis: {
-                                 type: 'category',
-                                 boundaryGap: false,
-                                 data: ["2017-01-01","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2017-01-07"]
-                               },
-                              yAxis: {
-                                type: 'value'
-                              },
-                              series: [
-                              {
-                                name:'每天活跃用户',
-                                type:'line',
-                                stack: '总量',
-                                data:[2146,2708,3023,3081,3830,5037,4737]
-                              }
-                             ]
-                            };
-                            myChart.setOption(option);
-                        </script>       
-                    </div>
-                </div>
-            </div>
-            </div>
             <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header"><h3>不同时间段的登陆用户数对比</h3></div>
@@ -207,21 +100,19 @@
                                 legend: {
                                   orient: 'vertical',
                                   left: 'left',
-                                  data: ['0~4时','4~8时','8~12时','12~16时','16~20时','20~24时']
+                                  data: ['0~6时','6~12时','12~18时','18~24时']
                                 },
                                 series : [
                                 {
                                    name: '用户数比例',
                                    type: 'pie',
                                    radius : '55%',
-                                   center: ['50%', '60%'],
+                                   center: ['50%', '45%'],
                                    data:[
-								     {value:138171, name:'0~4时'},
-                                     {value:22425, name:'4~8时'},
-                                     {value:19902, name:'8~12时'},
-                                     {value:35962, name:'12~16时'},
-                                     {value:38973, name:'16~20时'},
-                                     {value:78453, name:'20~24时'}
+								     {value:138171, name:'0~6时'},
+                                     {value:22425, name:'6~12时'},
+                                     {value:19902, name:'12~18时'},
+                                     {value:35962, name:'18~24时'}
                                     ],
                                   itemStyle: {
                                      emphasis: {
@@ -241,7 +132,7 @@
             </div>
 			<div class="layui-col-md6">
             <div class="layui-card">
-                <div class="layui-card-header"><h3>每天登录用户数</h3></div>
+                <div class="layui-card-header"><h3>每天的登录用户和活跃用户</h3></div>
                 <div class="layui-card-body" >
                     <div  id="DayLogin" style="width: 100%; height:400px;">
                         <script> 
@@ -255,6 +146,146 @@
                         var myChart = echarts.init(document.getElementById('DayLogin'));
 
                        var option = {
+                        legend: {
+                           data:['登陆用户数','活跃用户数']
+                        },
+                            calculable : true,
+                            xAxis : [
+                            {
+                               type : 'category',
+                               data : ["2017-01-01","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2017-01-07"]
+                            }
+                             ],
+                              yAxis : [
+                              {
+                                 type : 'value'
+                              }
+                              ],
+                              series : [
+                              {
+                                name:'登陆用户数',
+                               type:'bar',
+                                   data:[11076, 13930, 15394, 16371, 20144,26159, 24763],
+                                   markPoint : {
+                                data : [
+                                      {type : 'max', name: '最大值'},
+                                       {type : 'min', name: '最小值'}
+                                ]
+                                },
+                                markLine : {
+                                   data : [
+                                  {type : 'average', name: '平均值'}
+                                  ]
+                                }
+                              },
+                              {
+                                name:'活跃用户数',
+                                type:'bar',
+                                data:[2146,2708,3023,3081,3830,5037,4737],
+                                 markPoint : {
+                                 data : [
+                                     {name : '年最高', value : 5037, xAxis: 5, yAxis: 5037},
+                                     {name : '年最低', value : 2146, xAxis: 0, yAxis: 2146}
+                                 ]
+                                },
+                                 markLine : {
+                                data : [
+                                   {type : 'average', name : '平均值'}
+                                 ]
+                                }
+                                }
+                            ]
+                         };
+                            myChart.setOption(option);
+                        </script>             
+                    </div> 
+                </div>
+            </div>
+            </div>
+			<div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>用户时间top10</h3></div>
+                <div class="layui-card-body">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>游戏ID</th>
+                            <th>游戏时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1c0f9309-390c-40ab-9aac-69dc316c94b5</td>
+                            <td>542695</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>3</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>4</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>5</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>6</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>7</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>8</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>9</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+						<tr>
+                            <td>10</td>
+                            <td>4baeaff5-2df4-4650-ad03-59b20c04c9dc</td>
+                            <td>538126</td>
+                        </tr>
+                        </tbody>
+                    </table>   
+                </div>
+            </div>
+            </div>
+			<div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header"><h3>不同登陆天数用户统计</h3></div>
+                <div class="layui-card-body" >
+                    <div  id="EachDayLogin" style="width: 100%; height:440px;">
+                        <script> 
+                            var chart = echarts.init(document.getElementById('EachDayLogin'), 'westeros');
+                            chart.setOption({
+                                option
+                            });
+                        </script> 
+                        <script type = "text/javascript">
+
+                        var myChart = echarts.init(document.getElementById('EachDayLogin'));
+
+                       var option = {
                                  tooltip: {
                                        trigger: 'axis'
                                    },
@@ -263,26 +294,21 @@
                                    },
                                  grid: {
                                        left: '3%',
-                                       right: '4%',
+                                       right: '5%',
                                        bottom: '3%',
                                        containLabel: true
-                                   },
-                                 toolbox: {
-                                           feature: {
-                                                     saveAsImage: {}
-                                            }
                                    },
                                  xAxis: {
                                          type: 'category',
                                          boundaryGap: false,
-                                         data: ['2017-01-01','2017-01-02','2017-01-03','2017-01-04','2017-01-05','2017-01-06','2017-01-07']
+                                         data: ['1天','2天','3天','4天','5天','6天','7天']
                                    },
                                  yAxis: {
                                         type: 'value'
                                    },
                                  series: [
                                            {
-                                               name:'每天的登录用户数',
+                                               name:'不同登陆天数用户',
                                                type:'line',
                                                stack: '总量',
                                                data:[11076, 13930, 15394, 16371, 20144,26159, 24763]
