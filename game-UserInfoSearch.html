@@ -18,39 +18,50 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body layui-anim layui-anim-up">
-        <div class="layui-row">
-            <form class="layui-form">
-                <div class="layui-input-inline">
-                    <input type="tel" name="keyword" autocomplete="off"     placeholder="用户名称" class="layui-input">
+        <blockquote class="layui-elem-quote">
+            <p>&nbsp;&nbsp;&nbsp;在这里，你可以通过检索用户id，展示该用户的基本信息，包括使用操作系统，登录次数，在线时长等</p>
+        </blockquote>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-row" style="margin-bottom : 20px;">
+                        <form class="layui-form">
+                            <div class="layui-input-inline">
+                                <input type="tel" name="keyword" autocomplete="off"     placeholder="用户ID" class="layui-input">
+                            </div>
+                            <button class="layui-btn" id="searchEmailCompany" data-type="reload">
+                                <i class="layui-icon" style="font-size: 20px; "></i> 查询
+                            </button>
+                        </form>
+                    </div>
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>用户名称</th>
+                            <td>系统</td>
+                            <th>登录次数</th>
+                            <th>在线总时长</th>
+                            <th>次均登录时长</th>
+                            <th>在线日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>693a8106-30e5-4be6-9b97-74929d6bf476</td>
+                            <td>iOS</td>			
+                            <td>16</td>
+                            <td>478517</td>
+                            <td>29907.31</td>
+                            <td>1号、2号、3号、4号、5号、6号、7号</td>
+                        </tr>
+                        </tbody>
+                    </table>                   
                 </div>
-                <button class="layui-btn" id="searchEmailCompany" data-type="reload">
-                    <i class="layui-icon" style="font-size: 20px; "></i> 查询
-                </button>
-            </form>
-        </div>
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>用户名称</th>
-		    <td>系统</td>
-            <th>登录次数</th>
-            <th>在线总时长</th>
-            <th>次均登录时长</th>
-            <th>在线日期</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>693a8106-30e5-4be6-9b97-74929d6bf476</td>
-            <td>iOS</td>			
-            <td>16</td>
-            <td>478517</td>
-            <td>29907.31</td>
-            <td>1号、2号、3号、4号、5号、6号、7号</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </div>
+            </div>
+ 
     <script src="./js/common/commonJS.js"></script>  
     <!-- 统一引用js -->
 </body>
