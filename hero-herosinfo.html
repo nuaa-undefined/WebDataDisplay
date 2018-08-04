@@ -128,142 +128,124 @@
             $('#heroNum').html(data.heroNum);
             $('#userNum').html(data.userNum);
             $('#gameNum').html(data.gameNum);
-            $('#sumWinRate').html(data.sumWinRate);
+            $('#sumWinRate').html((data.sumWinRate * 100).toFixed(2) + '%');
             $('#moreUseHero').html(data.moreUseHero);
             $('#mostUsefulHero').html(data.mostUsefulHero);
         });
 
-        var myChart = echarts.init(document.getElementById('HeroPercentage'), 'westeros');
-
-        var option = {
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-
-            series: [{
-                name: '访问来源',
-                type: 'pie',
-                radius: '65%',
-                center: ['45%', '50%'],
-                data: [{
-                    value: 509,
-                    name: 'Teemo'
-                }, {
-                    value: 497,
-                    name: 'Annie'
-                }, {
-                    value: 494,
-                    name: 'Anivia'
-                }, {
-                    value: 491,
-                    name: 'ChoGath'
-                }, {
-                    value: 489,
-                    name: 'Nunu'
-                }, {
-                    value: 7520,
-                    name: '其他'
-                }, ].sort(function(a, b) {
-                    return a.value - b.value;
-                }),
-
-                animationType: 'scale',
-                animationEasing: 'elasticOut',
-                animationDelay: function(idx) {
-                    return Math.random() * 200;
+        $.get(host + '/hero/heroes/getHeroUseRate').done(function(data) {
+            var heroName = [];
+            var winRate = [];
+            var heroUse = [];
+            var otherSum = 0;
+            for (var i = 0; i < data.count; i++) {
+                heroName.push(data.data[i].name);
+                winRate.push((data.data[i].winRate * 100).toFixed(2));
+                if (i < 5) {
+                    heroUse.push({
+                        name: data.data[i].name,
+                        value: data.data[i].useSum
+                    });
+                } else {
+                    otherSum += data.data[i].useSum;
                 }
-            }]
-        };
-        myChart.setOption(option);
-
-        var mChart = echarts.init(document.getElementById('HeroWinRate'));
-
-        var dataAxis = ['Alistar', 'Amumu', 'Anivia', 'Annie', 'Ashe',
-            'ChoGath', 'Corki', 'DrMundo', 'Evelynn', 'Ezreal', 'Fiddlesticks', 'Gangplank',
-            'Irelia', 'Jax', 'Karthus', 'Kassadin', 'Kayle', 'Nunu', 'Teemo', 'Trundle', 'Yi'
-        ];
-        var data = [50.69, 48.87, 46.76, 51.51, 51.04, 49.08, 51.17, 53.39, 55.25, 52.38, 49.06, 52.27, 51.16, 53.33, 48.79, 52.58, 47.34, 50.31, 45.38, 51.94, 48.99];
-        var yMax = 60;
-        var dataShadow = [];
-
-        for (var i = 0; i < data.length; i++) {
-            dataShadow.push(yMax);
-        }
-
-        var moption = {
-            // title: {
-            //     text: '各英雄的胜率',
-            // },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{b}<br>{c}%'
-            },
-
-            xAxis: {
-                data: dataAxis,
-                axisTick: {
-                    show: false
+            }
+            heroUse.push({
+                name: '其他',
+                value: otherSum
+            });
+            echarts.init(document.getElementById('HeroPercentage'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-                spliltLine: {
-                    show: true
-                },
-                z: 30
-            },
-            yAxis: [{
-                type: 'value',
-                axisLabel: {
-                    show: true,
-                    interval: 'auto',
-                    formatter: '{value} %'
-                },
-                show: true
-            }],
-            dataZoom: [{
-                type: 'inside',
-            }, {
-                type: 'slider',
-                show: true,
-                handleSize: 20,
-                height: 10,
-                fillerColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                    //给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
-                    //给第一个设置0，第四个设置1，就是垂直渐变
-                    offset: 0,
-                    color: '#1eb5e5'
-                }, {
-                    offset: 1,
-                    color: '#516b91'
-                }]),
-                backgroundColor: '#ddd',
-                start: 30,
-                end: 60,
-            }],
-            series: [{
-                type: 'bar',
-                itemStyle: {
-                    normal: {
-                        color: ["#59c4e6"]
-                    },
-                    emphasis: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1, [{
-                                offset: 0,
-                                color: '#2378f7'
-                            }, {
-                                offset: 0.6,
-                                color: '#2378f7'
-                            }, {
-                                offset: 1,
-                                color: '#83bff6'
-                            }]
-                        )
+
+                series: [{
+                    name: '英雄使用次数',
+                    type: 'pie',
+                    radius: '65%',
+                    center: ['45%', '50%'],
+                    data: heroUse.sort(function(a, b) {
+                        return a.value - b.value;
+                    }),
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function(idx) {
+                        return Math.random() * 200;
                     }
+                }]
+            });
+
+            echarts.init(document.getElementById('HeroWinRate')).setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}<br>{c}%'
                 },
-                data: data
-            }]
-        };
-        mChart.setOption(moption);
+
+                xAxis: {
+                    data: heroName,
+                    axisTick: {
+                        show: false
+                    },
+                    spliltLine: {
+                        show: true
+                    },
+                    z: 30
+                },
+                yAxis: [{
+                    type: 'value',
+                    axisLabel: {
+                        show: true,
+                        interval: 'auto',
+                        formatter: '{value} %'
+                    },
+                    show: true
+                }],
+                dataZoom: [{
+                    type: 'inside',
+                }, {
+                    type: 'slider',
+                    show: true,
+                    handleSize: 20,
+                    height: 10,
+                    fillerColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                        //给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
+                        //给第一个设置0，第四个设置1，就是垂直渐变
+                        offset: 0,
+                        color: '#1eb5e5'
+                    }, {
+                        offset: 1,
+                        color: '#516b91'
+                    }]),
+                    backgroundColor: '#ddd',
+                    start: 30,
+                    end: 60,
+                }],
+                series: [{
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            color: ["#59c4e6"]
+                        },
+                        emphasis: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 0.6,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 1,
+                                    color: '#83bff6'
+                                }]
+                            )
+                        }
+                    },
+                    data: winRate
+                }]
+            });
+        });
     </script>
 </body>
 
