@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,20 @@
     <script src="./js/common/commonHead.js"></script>
     <title>英雄信息展示</title>
 </head>
+
 <body>
     <div class="x-nav">
-      <span class="layui-breadcrumb">
+        <span class="layui-breadcrumb">
         <a href="">首页</a>
         <a href="">游戏日志数据分析</a>
         <a><cite>英雄信息展示</cite></a>
       </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body layui-anim layui-anim-up">
-        <script src="./js/common/commonJS.js"></script>   
-         <fieldset class="layui-elem-field">
+        <script src="./js/common/commonJS.js"></script>
+        <fieldset class="layui-elem-field">
             <legend>英雄信息提要</legend>
             <div class="layui-field-box">
                 <div class="layui-col-md12">
@@ -31,37 +33,37 @@
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>英雄数</h3>
-                                                <p><cite>21</cite></p>
+                                                <p><cite id="heroNum">21</cite></p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>样本对阵次数</h3>
-                                                <p><cite>10000</cite></p>
+                                                <h3>对局次数</h3>
+                                                <p><cite id="gameNum">10000</cite></p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>样本用户数</h3>
-                                                <p><cite>100</cite></p>
+                                                <h3>用户数</h3>
+                                                <p><cite id="userNum">100</cite></p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>总胜率</h3>
-                                                <p><cite>50.50%</cite></p>
+                                                <p><cite id="sumWinRate">50.50%</cite></p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>使用率最高</h3>
-                                                <p><cite>Teemo</cite></p>
+                                                <p><cite id="moreUseHero">Teemo</cite></p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>胜率最高</h3>
-                                                <p><cite>Evelynn</cite></p>
+                                                <p><cite id="mostUsefulHero">Evelynn</cite></p>
                                             </a>
                                         </li>
                                     </ul>
@@ -71,154 +73,198 @@
                     </div>
                 </div>
             </div>
-        </fieldset> 
+        </fieldset>
         <div style="padding: 20px; background-color: #F2F2F2;">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>各英雄使用率</h3></div>
-                <div class="layui-card-body" >
-                    <div  id="HeroPercentage" style="width: 100%; height:400px;">
-                        <script type = "text/javascript">
-                            var myChart = echarts.init(document.getElementById('HeroPercentage'),'westeros');
-
-                            option = {
-                                tooltip : {
-                                    trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
-                                },
-
-                                series : [
-                                    {
-                                        name:'访问来源',
-                                        type:'pie',
-                                        radius : '65%',
-                                        center: ['45%', '50%'],
-                                        data:[
-                                            {value:509, name:'Teemo'},
-                                            {value:497, name:'Annie'},
-                                            {value:494, name:'Anivia'},
-                                            {value:491, name:'ChoGath'},
-                                            {value: 489, name:'Nunu'},
-                                            {value: 7520, name:'其他'} ,                        
-                                        ].sort(function (a, b) { return a.value - b.value; }),
-
-                                        animationType: 'scale',
-                                        animationEasing: 'elasticOut',
-                                        animationDelay: function (idx) {
-                                            return Math.random() * 200;
-                                        }
-                                    }
-                                ]
-                            };
-                            myChart.setOption(option);
-                        </script>             
-                    </div> 
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>明星英雄</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="starHero" style="width: 100%; height:400px;"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
-            <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>各英雄胜率</h3></div>
-                <div class="layui-card-body">
-                    <div id="HeroWinRate" style="width: 100%; height:400px;">   
-                        <script type = "text/javascript">
-                            var myChart = echarts.init(document.getElementById('HeroWinRate'));
-
-                            var dataAxis = ['Alistar', 'Amumu', 'Anivia', 'Annie', 'Ashe', 
-                            'ChoGath', 'Corki', 'DrMundo', 'Evelynn', 'Ezreal', 'Fiddlesticks', 'Gangplank', 
-                            'Irelia', 'Jax', 'Karthus', 'Kassadin', 'Kayle', 'Nunu', 'Teemo', 'Trundle','Yi'];
-                            var data = [50.69, 48.87, 46.76, 51.51, 51.04, 49.08, 51.17, 53.39, 55.25, 52.38,49.06, 52.27, 51.16  , 53.33, 48.79, 52.58, 47.34, 50.31,45.38,51.94,48.99];
-                            var yMax = 60;
-                            var dataShadow = [];
-
-                            for (var i = 0; i < data.length; i++) {
-                                dataShadow.push(yMax);
-                            }
-
-                            option = {
-                                // title: {
-                                //     text: '各英雄的胜率',
-                                // },
-                                tooltip : {
-                                    trigger: 'item',
-                                    formatter: '{b}<br>{c}%' 
-                                },
-
-                                xAxis: {
-                                    data: dataAxis,
-                                    axisTick: {
-                                        show: false
-                                    },
-                                    spliltLine:{
-                                        show:true
-                                    },
-                                    z: 30   
-                                },
-                                yAxis: [  
-                                    {  
-                                        type: 'value',  
-                                        axisLabel: {  
-                                            show: true,  
-                                            interval: 'auto',  
-                                            formatter: '{value} %'  
-                                            },  
-                                        show: true  
-                                    }  
-                                ],  
-                                dataZoom: [
-                                    {
-                                        type: 'inside',
-                                    },
-                                    {
-                                        type: 'slider',
-                                        show:true,
-                                        handleSize: 20,
-                                        height:10,
-                                        fillerColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                                        //给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
-                                        //给第一个设置0，第四个设置1，就是垂直渐变
-                                            offset: 0,
-                                            color: '#1eb5e5'
-                                        }, {
-                                            offset: 1,
-                                            color: '#516b91'
-                                        }]),
-                                        backgroundColor: '#ddd',
-                                        start:30,
-                                        end:60,
-                                    }
-                                ],
-                                series: [
-                                    {
-                                        type: 'bar',
-                                        itemStyle: {
-                                            normal: {
-                                                color:["#59c4e6"]
-                                            },
-                                            emphasis: {
-                                                color: new echarts.graphic.LinearGradient(
-                                                    0, 0, 0, 1,
-                                                    [
-                                                        {offset: 0, color: '#2378f7'},
-                                                        {offset: 0.6, color: '#2378f7'},
-                                                        {offset: 1, color: '#83bff6'}
-                                                    ]
-                                                )
-                                            }
-                                        },
-                                        data: data
-                                    }
-                                ]
-                            };
-                            myChart.setOption(option);
-                        </script>       
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>大神榜单</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="userRanks" style="width: 100%; height:400px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>各英雄使用率</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="HeroPercentage" style="width: 100%; height:400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>各英雄胜率</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="HeroWinRate" style="width: 100%; height:400px;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div> 
     </div>
+    <script type="text/javascript">
+        $.get(host + '/hero/log/getHeroInfo').done(function(data) {
+            $('#heroNum').html(data.heroNum);
+            $('#userNum').html(data.userNum);
+            $('#gameNum').html(data.gameNum);
+            $('#sumWinRate').html(data.sumWinRate);
+            $('#moreUseHero').html(data.moreUseHero);
+            $('#mostUsefulHero').html(data.mostUsefulHero);
+        });
+
+        var myChart = echarts.init(document.getElementById('HeroPercentage'), 'westeros');
+
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            series: [{
+                name: '访问来源',
+                type: 'pie',
+                radius: '65%',
+                center: ['45%', '50%'],
+                data: [{
+                    value: 509,
+                    name: 'Teemo'
+                }, {
+                    value: 497,
+                    name: 'Annie'
+                }, {
+                    value: 494,
+                    name: 'Anivia'
+                }, {
+                    value: 491,
+                    name: 'ChoGath'
+                }, {
+                    value: 489,
+                    name: 'Nunu'
+                }, {
+                    value: 7520,
+                    name: '其他'
+                }, ].sort(function(a, b) {
+                    return a.value - b.value;
+                }),
+
+                animationType: 'scale',
+                animationEasing: 'elasticOut',
+                animationDelay: function(idx) {
+                    return Math.random() * 200;
+                }
+            }]
+        };
+        myChart.setOption(option);
+
+        var mChart = echarts.init(document.getElementById('HeroWinRate'));
+
+        var dataAxis = ['Alistar', 'Amumu', 'Anivia', 'Annie', 'Ashe',
+            'ChoGath', 'Corki', 'DrMundo', 'Evelynn', 'Ezreal', 'Fiddlesticks', 'Gangplank',
+            'Irelia', 'Jax', 'Karthus', 'Kassadin', 'Kayle', 'Nunu', 'Teemo', 'Trundle', 'Yi'
+        ];
+        var data = [50.69, 48.87, 46.76, 51.51, 51.04, 49.08, 51.17, 53.39, 55.25, 52.38, 49.06, 52.27, 51.16, 53.33, 48.79, 52.58, 47.34, 50.31, 45.38, 51.94, 48.99];
+        var yMax = 60;
+        var dataShadow = [];
+
+        for (var i = 0; i < data.length; i++) {
+            dataShadow.push(yMax);
+        }
+
+        var moption = {
+            // title: {
+            //     text: '各英雄的胜率',
+            // },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}<br>{c}%'
+            },
+
+            xAxis: {
+                data: dataAxis,
+                axisTick: {
+                    show: false
+                },
+                spliltLine: {
+                    show: true
+                },
+                z: 30
+            },
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    show: true,
+                    interval: 'auto',
+                    formatter: '{value} %'
+                },
+                show: true
+            }],
+            dataZoom: [{
+                type: 'inside',
+            }, {
+                type: 'slider',
+                show: true,
+                handleSize: 20,
+                height: 10,
+                fillerColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                    //给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
+                    //给第一个设置0，第四个设置1，就是垂直渐变
+                    offset: 0,
+                    color: '#1eb5e5'
+                }, {
+                    offset: 1,
+                    color: '#516b91'
+                }]),
+                backgroundColor: '#ddd',
+                start: 30,
+                end: 60,
+            }],
+            series: [{
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: ["#59c4e6"]
+                    },
+                    emphasis: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#2378f7'
+                            }, {
+                                offset: 0.6,
+                                color: '#2378f7'
+                            }, {
+                                offset: 1,
+                                color: '#83bff6'
+                            }]
+                        )
+                    }
+                },
+                data: data
+            }]
+        };
+        mChart.setOption(moption);
+    </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,322 +8,377 @@
     <script src="./js/common/commonHead.js"></script>
     <title>电商时间分布</title>
 </head>
+
 <body>
     <div class="x-nav">
-      <span class="layui-breadcrumb">
+        <span class="layui-breadcrumb">
         <a href="">首页</a>
         <a href="">电商平台数据分析</a>
         <a><cite>时间分布分析</cite></a>
       </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
-    </div>  
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
     <div class="x-body layui-anim layui-anim-up">
-        <fieldset class="layui-elem-field"style="margin-bottom: 20px">
-        <legend>年份消费分布</legend>
-        <div class="layui-field-box">
-            <p>&nbsp;&nbsp;&nbsp;这里你将看到2004-2018年度的总体消费情况，其中2018年度仅包含第一季度的数据</p>
-            <br>
-        </div>
+        <fieldset class="layui-elem-field" style="margin-bottom: 20px">
+            <legend>年份消费分布</legend>
+            <div class="layui-field-box">
+                <p>&nbsp;&nbsp;&nbsp;这里你将看到2004-2018年度的总体消费情况，其中2018年度仅包含第一季度的数据</p>
+                <br>
+            </div>
         </fieldset>
         <div style="padding: 20px; background-color: #F2F2F2;">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md8">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>年度订单数量变化</h3></div>
-                <div class="layui-card-body" >
-                    <div  id="yearTotalNum" style="width: 100%; height:400px;">        
-                    </div> 
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md8">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>年度订单数量变化</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="yearTotalNum" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>数据分析</h3>
+                        </div>
+                        <div id="yearTotalNumAnalyse" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md8">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>年度订单总额变化</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="yearTotalConsume" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>数据分析</h3>
+                        </div>
+                        <div id="yearTotalConsumeAnalyse" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>订单数量性别走势</h3>
+                        </div>
+                        <div id="yearSexNum" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>订单数量性别分布</h3>
+                        </div>
+                        <div id="yearSexNumDistribution" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>订单金额性别变化</h3>
+                        </div>
+                        <div id="yearSexConsume" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>订单金额性别分布</h3>
+                        </div>
+                        <div id="yearSexConsumeDistribution" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-             <div class="layui-col-md4">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>数据分析</h3></div>
-                <div id="yearTotalNumAnalyse" style="width: 100%; height:400px;">
-                </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div> 
-            <div class="layui-col-md8">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>年度订单总额变化</h3></div>
-                <div class="layui-card-body" >
-                    <div  id="yearTotalConsume" style="width: 100%; height:400px;">   
-                    </div> 
-                </div>
-            </div>
-            </div>
-             <div class="layui-col-md4">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>数据分析</h3></div>
-                <div id="yearTotalConsumeAnalyse" style="width: 100%; height:400px;">
-                </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div> 
-             <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>订单数量性别走势</h3></div>
-                <div id="yearSexNum" style="width: 100%; height:400px;">
-                </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div> 
-             <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>订单数量性别分布</h3></div>
-                <div id="yearSexNumDistribution" style="width: 100%; height:400px;">
-                </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div>
-             <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>订单金额性别变化</h3></div>
-                <div id="yearSexConsume" style="width: 100%; height:400px;">
-                </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div> 
-             <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>订单金额性别分布</h3></div>
-                <div id="yearSexConsumeDistribution" style="width: 100%; height:400px;">
-                </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div>  
         </div>
-        </div>
-         <fieldset class="layui-elem-field" style="margin-top: 40px ;  margin-bottom: 20px">
-        <legend>月份消费分布</legend>
-        <div class="layui-field-box">
-            <p>&nbsp;&nbsp;&nbsp;这里你将看到2004-2018年度各个月份消费分布。</p>
-            <br>
-        </div>
-        </fieldset> 
+        <fieldset class="layui-elem-field" style="margin-top: 40px ;  margin-bottom: 20px">
+            <legend>月份消费分布</legend>
+            <div class="layui-field-box">
+                <p>&nbsp;&nbsp;&nbsp;这里你将看到2004-2018年度各个月份消费分布。</p>
+                <br>
+            </div>
+        </fieldset>
         <div style="padding: 20px; background-color: #F2F2F2;">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md7">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>订单数、成交率月分布</h3></div>
-                <div class="layui-card-body" >
-                    <div  id="mouthTotalNum" style="width: 100%; height:400px;">        
-                    </div> 
-                </div>
-            </div>
-            </div>
-            <div class="layui-col-md5">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>每个月所占订单比例</h3></div>
-                <div class="layui-card-body">
-                    <div id="mouthNumScale" style="width: 100%; height:400px;">    
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md7">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>订单数、成交率月分布</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="mouthTotalNum" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>
-            <div class="layui-col-md7">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>成交金额月分布</h3></div>
-                <div class="layui-card-body" >
-                    <div  id="mouthTotalConsume" style="width: 100%; height:400px;">        
-                    </div> 
-                </div>
-            </div>
-            </div>
-            <div class="layui-col-md5">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>每个月所占成交金额比例</h3></div>
-                <div class="layui-card-body">
-                    <div id="mouthConsumeScale" style="width: 100%; height:400px;">    
+                <div class="layui-col-md5">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>每个月所占订单比例</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="mouthNumScale" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="layui-col-md7">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>成交金额月分布</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="mouthTotalConsume" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>每个月所占成交金额比例</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="mouthConsumeScale" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>   
     </div>
-    <script src="./js/common/commonJS.js"></script> 
-    <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('yearTotalNum'), 'westeros');
+    <script src="./js/common/commonJS.js"></script>
+    <script type="text/javascript">
+        var firstChart = echarts.init(document.getElementById('yearTotalNum'), 'westeros');
+        $.get(host + '/ecommerce/log/giveRate').done(function(data) {
 
-        option = {
-            tooltip: {
-                trigger: 'axis'
-                
-            },
-            legend: {
-                data:['总交易次数','总成交次数','总失败次数']
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'总交易次数',
-                    type:'line',
-                    data:[7021, 7146, 7037, 7129, 7135, 7059, 7025,7081,7085,7041,7162,7157,7243,6952,731]
+            var year_data = [];
+            var buy_count = [];
+            var fail_count = [];
+            var success_count = [];
+            for (var i = 0; i < data.count; i++) {
+                year_data.push(data.data[i].year);
+                buy_count.push(data.data[i].buySum);
+                fail_count.push(data.data[i].failSum);
+                success_count.push(data.data[i].successSum);
+            }
+            firstChart.setOption({
+                tooltip: {
+                    trigger: 'axis'
+
                 },
-                {
-                    name:'总成交次数',
-                    type:'line',
-                    data:[2287, 2385, 2314, 2421, 2452, 2352, 2328,2326,2332,2342,2358,2437,2415,2272,252]
+                legend: {
+                    data: ['总交易次数', '总成交次数', '总失败次数']
                 },
-                {
-                    name:'总失败次数',
-                    type:'line',
-                    data:[4734,4761,4723,4708,4683,4707,4697,4755,4753,4699,4804,4720,4828,4680,479]
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: year_data
                 },
-            ]
-        };
-        myChart.setOption(option);
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '总交易次数',
+                    type: 'line',
+                    data: buy_count
+                }, {
+                    name: '总成交次数',
+                    type: 'line',
+                    data: success_count
+                }, {
+                    name: '总失败次数',
+                    type: 'line',
+                    data: fail_count
+                }, ]
+            });
+        });
     </script>
-    <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('yearTotalConsume'), 'westeros');
-
-        var dataAxis = ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018'];
-        var data = [2672.51,3007.44,3189.40,3417.30,3270.77,3076.34,3045.73,2709.01,3251.00,3186.09,2937.21,2986.22,2912.04,2980.89,462.10];
-
-        option = {
-            tooltip : {
-                trigger: 'item',
-                formatter: '年度：{b}<br>总金额：{c}（万元）' 
-            },
-            grid:{
-               x:90,
-               y:70,
-            },
-            xAxis: {
-                data: dataAxis,
-                xisTick: {
-                   show: false
-                 },
-                    pliltLine:{
-                        show:true
-                     },
-                    z: 30   
-            },
-            yAxis: [  
-                {  
+    <script type="text/javascript">
+        var secondChart = echarts.init(document.getElementById('yearTotalConsume'), 'westeros');
+        $.get(host + '/ecommerce/time/yearMoney').done(function(data) {
+            var year = []
+            var money = []
+            for (var i = 0; i < data.count; i++) {
+                year.push(data.data[i].year)
+                money.push((data.data[i].moneySum / 10000).toFixed(2))
+            }
+            secondChart.setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '年度：{b}<br>总金额：{c}（万元）'
+                },
+                grid: {
+                    x: 90,
+                    y: 70,
+                },
+                xAxis: {
+                    data: year,
+                    xisTick: {
+                        show: false
+                    },
+                    pliltLine: {
+                        show: true
+                    },
+                    z: 30
+                },
+                yAxis: [{
                     name: '单位（万元）',
-                    nameTextStyle:{
-                        fontSize:22,
+                    nameTextStyle: {
+                        fontSize: 22,
                         color: "#516b91",
-                        fontWeight:'bold',
+                        fontWeight: 'bold',
                         padding: [0, 0, 15, 5]
                     },
-                    type: 'value',  
-                    show: true 
-                }  
-            ],  
-            dataZoom: [
-                {
+                    type: 'value',
+                    show: true
+                }],
+                dataZoom: [{
                     type: 'inside',
-                },
-                {
-                    type: 'slider',
-                    show:true,
-                    handleSize: 20,
-                    height:10,
-                    fillerColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                    offset: 0,
-                    color: '#1eb5e5',
                 }, {
-                     offset: 1,
-                     color: '#516b91'
-                 }]),
-                     backgroundColor: '#ddd',
-                    start:30,
-                    end:60,
-                }
-            ],
-            series: [
-               {
+                    type: 'slider',
+                    show: true,
+                    handleSize: 20,
+                    height: 10,
+                    fillerColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                        offset: 0,
+                        color: '#1eb5e5',
+                    }, {
+                        offset: 1,
+                        color: '#516b91'
+                    }]),
+                    backgroundColor: '#ddd',
+                    start: 30,
+                    end: 60,
+                }],
+                series: [{
                     type: 'bar',
                     itemStyle: {
                         normal: {
-                            color:["#59c4e6"]
-                    },
-                    
-                    emphasis: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#2378f7'},
-                                {offset: 0.6, color: '#2378f7'},
-                                {offset: 1, color: '#83bff6'}
-                            ]
-                        )
-                    }
-                    },
-                    data: data
-               }
-            ]
-        };  
-        myChart.setOption(option);
-    </script>
-    <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('yearSexNum'), 'westeros');
+                            color: ["#59c4e6"]
+                        },
 
-        option = {
-            tooltip: {
-                trigger: 'axis'
-                
-            },
-            legend: {
-                data:['男性用户交易次数','女性用户交易次数']
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'男性用户交易次数',
-                    type:'line',
-                    data:[1606,1750,1826,1854,1726,1753,1770,1740,1733,1793,1834,1780,1823,1724,289]
-                },
-                {
-                    name:'女性用户交易次数',
-                    type:'line',
-                    data:[5415,5396,5211,5275,5409,5309,5255,5341,5352,5248,5328,5377,5420,5528,442]
-                },
-            ]
-        };
-        myChart.setOption(option);
+                        emphasis: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 0.6,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 1,
+                                    color: '#83bff6'
+                                }]
+                            )
+                        }
+                    },
+                    data: money
+                }]
+            });
+        });
     </script>
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('yearSexNumDistribution'), 'westeros');
-        option = {
-            tooltip: {
-                trigger: 'item',
-                formatter: "{b}: <br/>{c} ({d}%)"
-            },
-            legend: {
-                orient: 'vertical',
-                right:'6%',
-                top:'3%',
-                data:['男性用户交易次数','女性用户交易次数'],
-            },
-            series: [
-                {
-                    type:'pie',
+    <script type="text/javascript">
+        $.get(host + '/ecommerce/time/sexConsumeCount').done(function(data) {
+            var years = [];
+            var manCount = [];
+            var womanCount = [];
+            var manMoney = [];
+            var womanMoney = [];
+            var manCountSum = 0;
+            var womanCountSum = 0;
+            var countSum = 0;
+            var manConsumeSum = 0;
+            var womanConsumeSum = 0;
+            var consumeSum = 0;
+            var manNumSum = 0;
+            var womanNumSum = 0;
+            var userNumSum = 0;
+            for (var i = 0; i < data.count; i++) {
+                years.push(data.data[i].year);
+                manCount.push(data.data[i].manBuyCount);
+                womanCount.push(data.data[i].womanBuyCount);
+                manMoney.push((data.data[i].manMoneySum / 10000).toFixed(2));
+                womanMoney.push((data.data[i].womanMoneySum / 10000).toFixed(2));
+                manCountSum += data.data[i].manBuyCount;
+                womanCountSum += data.data[i].womanBuyCount;
+                manNumSum += data.data[i].manUserNum;
+                womanNumSum += data.data[i].womanUserNum;
+                manConsumeSum += data.data[i].manMoneySum;
+                womanConsumeSum += data.data[i].womanMoneySum;
+            }
+            countSum = manCountSum + womanCountSum;
+            consumeSum = manConsumeSum + womanConsumeSum;
+            userNumSum = manNumSum + womanNumSum;
+
+            echarts.init(document.getElementById('yearSexNum'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'axis'
+
+                },
+                legend: {
+                    data: ['男性用户交易次数', '女性用户交易次数']
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: years
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '男性用户交易次数',
+                    type: 'line',
+                    data: manCount
+                }, {
+                    name: '女性用户交易次数',
+                    type: 'line',
+                    data: womanCount
+                }, ]
+            });
+
+            echarts.init(document.getElementById('yearSexNumDistribution'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{b}: <br/>{c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    right: '6%',
+                    top: '3%',
+                    data: ['男性用户交易次数', '女性用户交易次数'],
+                },
+                series: [{
+                    type: 'pie',
                     selectedMode: 'single',
                     radius: [0, '75%'],
 
@@ -336,101 +392,95 @@
                             show: false
                         }
                     },
-                    data:[
-                        {value:25001, name:'男性用户交易次数', selected:true},
-                        {value:75003, name:'女性用户交易次数'},
-                    ]
-                }
-            ]
-        };
-        myChart.setOption(option);
-    </script>         
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('yearSexConsume'), 'westeros');
-
-        option = {
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['男性用户','女性用户']
-            },
-            grid:{
-               x:90,
-               y:60,
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    data : ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018']
-                }
-            ],
-            yAxis : [
-                {
+                    data: [{
+                        value: manCountSum,
+                        name: '男性用户交易次数',
+                        selected: true
+                    }, {
+                        value: womanCountSum,
+                        name: '女性用户交易次数'
+                    }, ]
+                }]
+            });
+            echarts.init(document.getElementById('yearSexConsume'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['男性用户', '女性用户']
+                },
+                grid: {
+                    x: 90,
+                    y: 60,
+                },
+                calculable: true,
+                xAxis: [{
+                    type: 'category',
+                    data: years
+                }],
+                yAxis: [{
                     name: '单位（万元）',
-                    nameTextStyle:{
-                        fontSize:18,
+                    nameTextStyle: {
+                        fontSize: 18,
                         color: "#516b91",
-                        fontWeight:'bold',
+                        fontWeight: 'bold',
                         padding: [0, 0, 10, 5]
                     },
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    name:'男性用户',
-                    type:'bar',
-                    data:[2583.69,2918.73,3103.59,3327.32,3179.20,2990.31,2959.14,2620.09,3164.21,3099.00,2848.34,2895.49,2820.79,2895.35,8.15],
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                        ]
+                    type: 'value'
+                }],
+                series: [{
+                    name: '男性用户',
+                    type: 'bar',
+                    data: manMoney,
+                    markPoint: {
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }, {
+                            type: 'min',
+                            name: '最小值'
+                        }]
                     },
-                    markLine : {
-                        data : [
-                            {type : 'average', name: '平均值'}
-                        ]
+                    markLine: {
+                        data: [{
+                            type: 'average',
+                            name: '平均值'
+                        }]
                     }
+                }, {
+                    name: '女性用户',
+                    type: 'bar',
+                    data: womanMoney,
+                    markPoint: {
+                        data: [{
+                            name: '最大值',
+                            type: 'max'
+                        }, {
+                            name: '最小值',
+                            type: 'min'
+                        }]
+                    },
+                    markLine: {
+                        data: [{
+                            type: 'average',
+                            name: '平均值'
+                        }]
+                    }
+                }]
+            });
+            echarts.init(document.getElementById('yearSexConsumeDistribution'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: <br/>{c} ({d}%)"
                 },
-                {
-                    name:'女性用户',
-                    type:'bar',
-                    data:[88.82,88.70,67 ,378,545,32,355,435,657,399],
-                    markPoint : {
-                        data : [
-                            {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
-                            {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-                        ]
-                    },
-                    markLine : {
-                        data : [
-                            {type : 'average', name : '平均值'}
-                        ]
-                    }
-                }
-            ]
-        };
-        myChart.setOption(option);
-    </script> 
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('yearSexConsumeDistribution'), 'westeros');
-        option = {
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b}: <br/>{c} ({d}%)"
-            },
-            legend: {
-                orient: 'vertical',
-                right:'6%',
-                top:'3%',
-                data:['男性平均消费额','女性平均消费额','男性消费总额','女性消费总额'],
-            },
-            series: [
-                {
-                    type:'pie',
+                legend: {
+                    orient: 'vertical',
+                    right: '6%',
+                    top: '3%',
+                    data: ['男性平均消费额', '女性平均消费额', '男性消费总额', '女性消费总额'],
+                },
+                series: [{
+                    type: 'pie',
                     selectedMode: 'single',
                     radius: [0, '35%'],
 
@@ -444,18 +494,21 @@
                             show: false
                         }
                     },
-                    data:[
-                        {value:5.62, name:'男性平均消费额', selected:true},
-                        {value:3.88, name:'女性平均消费额'},
-                    ]
-                },
-                {
-                    name:'用户性别',
-                    type:'pie',
+                    data: [{
+                        value: (manConsumeSum / manNumSum).toFixed(2),
+                        name: '男性平均消费额',
+                        selected: true
+                    }, {
+                        value: (womanConsumeSum / womanNumSum).toFixed(2),
+                        name: '女性平均消费额'
+                    }, ]
+                }, {
+                    name: '用户性别',
+                    type: 'pie',
                     radius: ['50%', '75%'],
                     label: {
                         normal: {
-                            formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：\n}{c}  {per|{d}%} \n ',
+                            formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：\n}{c}万元  {per|{d}%} \n ',
                             backgroundColor: '#eee',
                             borderColor: '#aaa',
                             borderWidth: 1,
@@ -485,74 +538,92 @@
                             }
                         }
                     },
-                    data:[
-                        {value:29279.87, name:'女性消费总额'},
-                        {value:13832.30, name:'男性消费总额'},
-                    ]
-                }
-            ]
-        };
-        myChart.setOption(option);
-    </script> 
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('mouthTotalNum'), 'westeros');
-        option = {
-            dataset: {
-                source: [
-                    ['score', 'amount', 'product'],
-                    [24.99, 8369, '12月'],
-                    [25.74, 8078, '11月'],
-                    [25.41, 8567, '10月'],
-                    [24.41, 8127, '9月'],
-                    [25.32, 8486, '8月'],
-                    [24.74, 8445, '7月'],
-                    [24.59, 8247, '6月'],
-                    [25.13, 8419, '5月'],
-                    [24.64, 8187, '4月'],
-                    [25.22, 8344, '3月'],
-                    [25.25, 7880, '2月'],
-                    [24.58, 8855, '1月'],
-                ]
-            },
-            grid: {
-                right:'12%',
-                bottom: '20%',//距离下边的距离
-                top: '10%' 
-                }, 
-            xAxis: {
-                name: '总订单数',
-                nameTextStyle:{
-                    fontSize:14,
-                    color: "#516b91",
-                    fontWeight:'bold',
-                    padding: [0, 0, 5, 5]
-                },   
-            },
-            yAxis: {
-                name: '月份',
-                nameTextStyle:{
-                    fontSize:16,
-                    color: "#516b91",
-                    fontWeight:'bold',
-                    padding: [0, 0, 5, 5]
+                    data: [{
+                        value: (womanConsumeSum / 10000).toFixed(2),
+                        name: '女性消费总额'
+                    }, {
+                        value: (manConsumeSum / 10000).toFixed(2),
+                        name: '男性消费总额'
+                    }, ]
+                }]
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $.get(host + '/ecommerce/time/monthDistribution').done(function(data) {
+            var months = []
+            var firstSource = []
+            var monthCountData = []
+            var manConsumeMonth = []
+            var womanConsumeMonth = []
+            var manConsumeRate = []
+            var womanConsumeRate = []
+            var sumConsumeRate = []
+            var sumConsumeMonth = 0
+            firstSource.push(['score', 'amount', 'product'])
+            for (var i = 0; i < data.count; i++) {
+                sumConsumeMonth += (data.data[i].moneySum);
+                firstSource.push([
+                    (data.data[i].successSum / data.data[i].buySum * 100).toFixed(2),
+                    data.data[i].buySum,
+                    data.data[i].month + '月'
+                ]);
+                months.push(data.data[i].month + '月');
+                monthCountData.push({
+                    name: data.data[i].month + '月',
+                    value: data.data[i].buySum
+                });
+                manConsumeMonth.push((data.data[i].manMoneySum / 10000).toFixed(2))
+                womanConsumeMonth.push((data.data[i].womanMoneySum / 10000).toFixed(2))
+            }
+            for (var i = 0; i < data.count; i++) {
+                manConsumeRate.push((data.data[i].manMoneySum / sumConsumeMonth * 100).toFixed(2));
+                womanConsumeRate.push((data.data[i].womanMoneySum / sumConsumeMonth * 100).toFixed(2));
+                sumConsumeRate.push((data.data[i].moneySum / sumConsumeMonth * 100).toFixed(2));
+            }
+
+            echarts.init(document.getElementById('mouthTotalNum'), 'westeros').setOption({
+                dataset: {
+                    source: firstSource
                 },
-                type: 'category'
-            },
-            visualMap: {
-                orient: 'horizontal',
-                left: '25%',
-                min: 24,
-                max: 26,
-                text: ['高成交率（百分比）', '低成交率'],
-                // Map the score column to color
-                dimension: 0,
-                inRange: {
-                    color: ['#59c4e6', '#edafda'],
+                grid: {
+                    right: '12%',
+                    bottom: '20%', //距离下边的距离
+                    top: '10%'
                 },
-                bottom:'3%',
-            },
-            series: [
-                {
+                xAxis: {
+                    name: '总订单数',
+                    nameTextStyle: {
+                        fontSize: 14,
+                        color: "#516b91",
+                        fontWeight: 'bold',
+                        padding: [0, 0, 5, 5]
+                    },
+                },
+                yAxis: {
+                    name: '月份',
+                    nameTextStyle: {
+                        fontSize: 16,
+                        color: "#516b91",
+                        fontWeight: 'bold',
+                        padding: [0, 0, 5, 5]
+                    },
+                    type: 'category'
+                },
+                visualMap: {
+                    orient: 'horizontal',
+                    left: '25%',
+                    min: 30,
+                    max: 35,
+                    text: ['高成交率（百分比）', '低成交率'],
+                    // Map the score column to color
+                    dimension: 0,
+                    inRange: {
+                        color: ['#59c4e6', '#edafda'],
+                    },
+                    bottom: '3%',
+                },
+                series: [{
                     type: 'bar',
                     encode: {
                         // Map the "amount" column to X axis.
@@ -560,32 +631,26 @@
                         // Map the "product" column to Y axis
                         y: 'product'
                     },
-                }
-            ]
-        };
-        myChart.setOption(option);
-    </script>
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('mouthNumScale'), 'westeros');
-        option = {
+                }]
+            });
+            echarts.init(document.getElementById('mouthNumScale'), 'westeros').setOption({
 
-            tooltip : {
-                trigger: 'item',
-                formatter: "{b} : <br/>{c} ({d}%)"
-            },
-            legend: {
-                x : 'center',
-                y : 'bottom',
-                data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-            },
-            calculable : true,
-            series : [
-                {
-                    name:'半径模式',
-                    type:'pie',
-                    radius : [30, 120],
-                    center : ['50%', '40%'],
-                    roseType : 'radius',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{b} : <br/>{c} ({d}%)"
+                },
+                legend: {
+                    x: 'center',
+                    y: 'bottom',
+                    data: months
+                },
+                calculable: true,
+                series: [{
+                    name: '半径模式',
+                    type: 'pie',
+                    radius: [30, 120],
+                    center: ['50%', '40%'],
+                    roseType: 'radius',
                     label: {
                         normal: {
                             show: false
@@ -602,82 +667,72 @@
                             show: true
                         }
                     },
-                    data:[
-                        {value:8855, name:'1月'},
-                        {value:7880, name:'2月'},
-                        {value:8344, name:'3月'},
-                        {value:8187, name:'4月'},
-                        {value:8419, name:'5月'},
-                        {value:8247, name:'6月'},
-                        {value:8445, name:'7月'},
-                        {value:8486, name:'8月'},
-                        {value:8127, name:'9月'},
-                        {value:8567, name:'10月'},
-                        {value:8078, name:'11月'},
-                        {value:8369, name:'12月'},
-                    ]
+                    data: monthCountData
+                }, ]
+            });
+            echarts.init(document.getElementById('mouthTotalConsume'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'axis'
                 },
-            ]
-        };
-        myChart.setOption(option);
-    </script>       
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('mouthTotalConsume'), 'westeros');
-        option = {
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['男性消费总额','女性消费总额']
-            },
-            grid:{
-               x:80,
-               y:70,
-            },
-            xAxis:  {
-                type: 'category',
-                boundaryGap: false,
-                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-            },
-            yAxis: {
-                type: 'value',
-                name: '单位（万元）',
-                nameTextStyle:{
-                    fontSize:18,
-                     color: "#516b91",
-                    fontWeight:'bold',
-                    padding: [0, 0, 10, 5]
+                legend: {
+                    data: ['男性消费总额', '女性消费总额']
                 },
-            },
-            series: [
-                {
-                    name:'男性消费总额',
-                    type:'line',
-                    data:[11, 11, 15, 13, 12, 13, 10],
+                grid: {
+                    x: 80,
+                    y: 70,
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: months
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '单位（万元）',
+                    nameTextStyle: {
+                        fontSize: 18,
+                        color: "#516b91",
+                        fontWeight: 'bold',
+                        padding: [0, 0, 10, 5]
+                    },
+                },
+                series: [{
+                    name: '男性消费总额',
+                    type: 'line',
+                    data: manConsumeMonth,
                     markPoint: {
-                        data: [
-                            {type: 'max', name: '最大值'},
-                            {type: 'min', name: '最小值'}
-                        ]
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }, {
+                            type: 'min',
+                            name: '最小值'
+                        }]
                     },
                     markLine: {
-                        data: [
-                            {type: 'average', name: '平均值'}
-                        ]
+                        data: [{
+                            type: 'average',
+                            name: '平均值'
+                        }]
                     }
-                },
-                {
-                    name:'女性消费总额',
-                    type:'line',
-                    data:[1, -2, 2, 5, 3, 2, 0],
+                }, {
+                    name: '女性消费总额',
+                    type: 'line',
+                    data: womanConsumeMonth,
                     markPoint: {
-                        data: [
-                            {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-                        ]
+                        data: [{
+                            name: '最大值',
+                            type: 'max'
+                        }, {
+                            name: '最小值',
+                            type: 'min'
+                        }]
                     },
                     markLine: {
-                        data: [
-                            {type: 'average', name: '平均值'},
+                        data: [{
+                                type: 'average',
+                                name: '平均值'
+                            },
                             [{
                                 symbol: 'none',
                                 x: '90%',
@@ -695,59 +750,56 @@
                             }]
                         ]
                     }
-                }
-            ]
-        };
-        myChart.setOption(option);
-    </script>   
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('mouthConsumeScale'), 'westeros');
-        option = {
+                }]
+            });
+            echarts.init(document.getElementById('mouthConsumeScale'), 'westeros').setOption({
 
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                x: 'center',
-                top:'5%',
-                data:['男性成交金额比例','女性成交金额比例','总成交金额比例']
-            },
-            radar: [
-                {
-                    indicator: (function (){
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    x: 'center',
+                    top: '5%',
+                    data: ['男性成交金额比例', '女性成交金额比例', '总成交金额比例']
+                },
+                radar: [{
+                    indicator: (function() {
                         var res = [];
                         for (var i = 1; i <= 12; i++) {
-                            res.push({text:i+'月',max:100});
+                            res.push({
+                                text: i + '月',
+                                max: 10
+                            });
                         }
                         return res;
                     })(),
-                    center: ['50%','50%'],
+                    center: ['50%', '50%'],
                     radius: 100
-                }
-            ],
-            series: [
-                {
+                }],
+                series: [{
                     type: 'radar',
-                    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                    itemStyle: {
+                        normal: {
+                            areaStyle: {
+                                type: 'default'
+                            }
+                        }
+                    },
                     //假数据
-                    data: [
-                        {
-                            name:'总成交金额比例',
-                            value:[4.6, 10.8, 16, 49.6, 54.3, 147.4, 111.2, 62.2, 81.3, 48.8, 12.4, 5.6]
-                        },
-                        {
-                            name: '男性成交金额比例',
-                            value: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3],
-                        },
-                        {
-                            name:'女性成交金额比例',
-                            value:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 35.6, 62.2, 32.6, 20.0, 6.4, 3.3]
-                        },
-                    ]
-                }
-            ]
-        };
-        myChart.setOption(option);
-    </script>        
+                    data: [{
+                        name: '总成交金额比例',
+                        value: sumConsumeRate
+                    }, {
+                        name: '男性成交金额比例',
+                        value: manConsumeRate
+                    }, {
+                        name: '女性成交金额比例',
+                        value: womanConsumeRate
+                    }, ]
+                }]
+            });
+        });
+    </script>
 </body>
+
 </html>

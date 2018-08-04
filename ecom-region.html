@@ -34,7 +34,7 @@
                 <div class="layui-col-md6">
                     <div class="layui-card">
                         <div class="layui-card-header">
-                            <h3>各省级行政区消费分布占比</h3>
+                            <h3>top6省级行政区消费占比</h3>
                         </div>
                         <div class="layui-card-body">
                             <div id="percent_chart" style="width:100%;height:400px"></div>
@@ -70,272 +70,246 @@
     <script src="./js/common/commonJS.js"></script>
     <script src="./js/echarts/china.js"></script>
     <script>
-        var myChart = echarts.init(document.getElementById('china-map'), 'westeros');
-        var option = {
-            title: {
-                text: '消费分布',
-                subtext: '简单测试',
-                top: '1%',
-                x: 'center'
-            },
-            tooltip: { //提示框组件。
-                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
-            },
-            legend: {
-                orient: 'horizontal', //图例的排列方向
-                x: 'left', //图例的位置
-                data: ['订单量']
-            },
+        $.get(host + '/ecommerce/region/listRegionData').done(function(data) {
 
-            visualMap: { //颜色的设置  dataRange
-                x: 'left',
-                y: 'center',
-                splitList: [{
-                    start: 1500
-                }, {
-                    start: 900,
-                    end: 1500
-                }, {
-                    start: 310,
-                    end: 1000
-                }, {
-                    start: 200,
-                    end: 300
-                }, {
-                    start: 10,
-                    end: 200,
-                    label: '10 到 200（自定义label）'
-                }, {
-                    start: 5,
-                    end: 5,
-                    label: '5（自定义特殊颜色）',
-                    color: 'black'
-                }, {
-                    end: 10
-                }],
-                //            min: 0,
-                //            max: 2500,
-                //            calculable : true,//颜色呈条状
-                text: ['高', '低'], // 文本，默认为数值文本
-                color: ['#E0022B', '#E09107', '#A3E00B']
-            },
-            toolbox: { //工具栏
-                show: true,
-                orient: 'vertical', //工具栏 icon 的布局朝向
-                x: 'right',
-                y: 'bottom',
-                itemSize: 18,
-                feature: { //各工具配置项。
-                    mark: {
-                        show: true
-                    },
-                    dataView: {
-                        show: true,
-                        readOnly: false
-                            // icon: 'iamge://images/edit.png'
-                    }, //数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
-                    restore: {
-                        show: true
-                            // icon: 'iamge://images/refresh.png'
-                    }, //配置项还原。
-                    saveAsImage: {
-                        show: true
-                            // icon: 'image://images/save.png'
-                    } //保存为图片。
-                }
-            },
-            series: [{
-                name: '消费总额',
-                type: 'map',
-                mapType: 'china',
-                //    zoom: 0.85,
-                roam: true, //是否开启鼠标缩放和平移漫游
-                itemStyle: { //地图区域的多边形 图形样式
-                    normal: { //是图形在默认状态下的样式
-                        label: {
-                            show: true, //是否显示标签
-                            textStyle: {
-                                color: "rgb(249, 249, 249)"
-                            }
-                        }
-                    },
-                    emphasis: { //是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
-                        label: {
+            var all_region_data = []
+            var top6_region = []
+            var top6_region_data = []
+            var avg_consume = []
+            var region = []
+            var other_region_money = 0;
+            for (var i = 0; i < data.count; i++) {
+                region.push(data.data[i].regionName);
+                all_region_data.push({
+                    name: data.data[i].regionName,
+                    value: (data.data[i].sumMoney / 10000).toFixed(2)
+                });
+                avg_consume.push((data.data[i].sumMoney / data.data[i].userNum).toFixed(2));
+            }
+            for (var i = 0; i < 6; i++) {
+                top6_region.push(data.data[i].regionName);
+                top6_region_data.push({
+                    name: data.data[i].regionName,
+                    value: (data.data[i].sumMoney / 10000).toFixed(2)
+                });
+            }
+            top6_region.push('其他')
+            for (var i = 6; i < data.count; i++) {
+                other_region_money += data.data[i].sumMoney;
+            }
+            top6_region_data.push({
+                name: '其他',
+                value: (other_region_money / 10000).toFixed(2)
+            });
+
+            var mychart = echarts.init(document.getElementById('china-map'), 'westeros');
+            mychart.setOption({
+                title: {
+                    text: '消费分布 (万元)',
+                    top: '1%',
+                    x: 'center'
+                },
+                tooltip: { //提示框组件。
+                    trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+                },
+                legend: {
+                    orient: 'horizontal', //图例的排列方向
+                    x: 'left', //图例的位置
+                    data: ['订单量']
+                },
+
+                visualMap: { //颜色的设置  dataRange
+                    x: 'left',
+                    y: 'center',
+                    splitList: [{
+                        start: 1500
+                    }, {
+                        start: 900,
+                        end: 1500
+                    }, {
+                        start: 310,
+                        end: 1000
+                    }, {
+                        start: 200,
+                        end: 300
+                    }, {
+                        start: 10,
+                        end: 200,
+                        label: '10 到 200（自定义label）'
+                    }, {
+                        start: 5,
+                        end: 5,
+                        label: '5（自定义特殊颜色）',
+                    }, {
+                        end: 10
+                    }],
+                    //            min: 0,
+                    //            max: 2500,
+                    //            calculable : true,//颜色呈条状
+                    text: ['高', '低'] // 文本，默认为数值文本
+                },
+                toolbox: { //工具栏
+                    show: true,
+                    orient: 'vertical', //工具栏 icon 的布局朝向
+                    x: 'right',
+                    y: 'bottom',
+                    itemSize: 18,
+                    feature: { //各工具配置项。
+                        mark: {
                             show: true
                         }
                     }
                 },
-                top: "6%", //组件距离容器的距离
-                data: [{
-                    name: '北京',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '天津',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '上海',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '重庆',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '河北',
-                    value: 0
-                }, {
-                    name: '河南',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '云南',
-                    value: 5
-                }, {
-                    name: '辽宁',
-                    value: 305
-                }, {
-                    name: '黑龙江',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '湖南',
-                    value: 200
-                }, {
-                    name: '安徽',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '山东',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '新疆',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '江苏',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '浙江',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '江西',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '湖北',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '广西',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '甘肃',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '山西',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '内蒙古',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '陕西',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '吉林',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '福建',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '贵州',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '广东',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '青海',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '西藏',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '四川',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '宁夏',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '海南',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '台湾',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '香港',
-                    value: Math.round(Math.random() * 2000)
-                }, {
-                    name: '澳门',
-                    value: Math.round(Math.random() * 2000)
+                series: [{
+                    name: '消费总额',
+                    type: 'map',
+                    mapType: 'china',
+                    //    zoom: 0.85,
+                    roam: true, //是否开启鼠标缩放和平移漫游
+                    itemStyle: { //地图区域的多边形 图形样式
+                        normal: { //是图形在默认状态下的样式
+                            label: {
+                                show: true, //是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis: { //是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label: {
+                                show: true
+                            }
+                        }
+                    },
+                    top: "6%", //组件距离容器的距离
+                    data: all_region_data
                 }]
-            }]
-        };
-        myChart.setOption(option);
-        myChart.on('click', function(params) {
-            var dataIndex = params.dataIndex;
-            console.log(params);
-        });
+            });
+            mychart.on('click', function(params) {
+                var dataIndex = params.dataIndex;
+                console.log(params);
+            });
 
-        percent_option = {
-            title: {
-                text: '',
-                subtext: '',
-                x: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left',
-                y: '20%',
-                data: ['北京市', '上海市', '江苏省', '浙江省', '福建省', '天津市', '其他']
-            },
-            series: [{
-                name: '消费占比',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '50%'],
-                data: [{
-                    value: 1100,
-                    name: '北京市'
-                }, {
-                    value: 1000,
-                    name: '上海市'
-                }, {
-                    value: 2000,
-                    name: '江苏省'
-                }, {
-                    value: 1600,
-                    name: '浙江省'
-                }, {
-                    value: 1400,
-                    name: '福建省'
-                }, {
-                    value: 1000,
-                    name: '天津市'
-                }, {
-                    value: 3000,
-                    name: '其他'
-                }].sort(function(a, b) {
-                    return b.value - a.value;
-                }),
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+            echarts.init(document.getElementById('percent_chart'), 'westeros').setOption({
+                title: {
+                    text: '',
+                    subtext: '',
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    y: '20%',
+                    data: top6_region
+                },
+                series: [{
+                    name: '消费占比',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '50%'],
+                    data: top6_region_data,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
                     }
-                }
-            }]
-        };
-        percent_chart = echarts.init(document.getElementById('percent_chart'), 'westeros');
-        percent_chart.setOption(percent_option);
+                }]
+            });
+            echarts.init(document.getElementById('area-year-chart'), 'westeros').setOption({
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '北京市',
+                    type: 'line',
+                    stack: '总量',
+                    data: [120, 132, 101, 134, 90, 230, 210, 220, 450, 500, 501, 420, 300, 900, 910]
+                }, {
+                    name: '上海市',
+                    type: 'line',
+                    stack: '总量',
+                    data: [820, 932, 901, 934, 1290, 1330, 1320, 1220, 1100, 1210, 900, 1200, 1310, 1500, 1600]
+                }, {
+                    name: '江苏省',
+                    type: 'line',
+                    stack: '总量',
+                    data: [920, 1332, 1301, 1534, 1390, 1330, 1420, 1300, 1320, 1330, 1440, 1500, 1501, 1600, 1800]
+                }, {
+                    name: '浙江省',
+                    type: 'line',
+                    stack: '总量',
+                    data: [320, 332, 301, 334, 390, 330, 320, 400, 450, 476, 600, 620, 720, 790, 750, 865]
+                }, {
+                    name: '福建省',
+                    type: 'line',
+                    stack: '总量',
+                    data: [220, 182, 191, 234, 290, 330, 310, 410, 420, 420, 510, 390, 600, 500, 560, 510]
+                }, {
+                    name: '天津市',
+                    type: 'line',
+                    stack: '总量',
+                    data: [150, 232, 201, 154, 190, 330, 410, 500, 600, 700, 720, 800, 750, 790, 810, 880]
+                }]
+            });
+            echarts.init(document.getElementById('area-avg-chart'), 'westeros').setOption({
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    data: region
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '直接访问',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: avg_consume
+                }]
+            });
+        });
     </script>
-    <script src="./js/ecommerce-charts/area-year-chart.js"></script>
-    <script src="./js/ecommerce-charts/area-avg-chart.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,207 +8,283 @@
     <script src="./js/common/commonHead.js"></script>
     <title>hero玩家查询</title>
 </head>
+
 <body>
     <div class="x-nav">
-      <span class="layui-breadcrumb">
+        <span class="layui-breadcrumb">
         <a href="">首页</a>
         <a href="">游戏日志数据分析</a>
         <a><cite>玩家信息查询</cite></a>
       </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">
             <p>&nbsp;&nbsp;&nbsp;在这里，你可以通过检索玩家id，展示玩家基本信息，同时查看该玩家最常用英雄*3，及其在各分路中的表现</p>
         </blockquote>
         <div style="padding: 20px; background-color: #F2F2F2;">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="layui-row" style="margin-bottom : 20px;">
-                        <form class="layui-form">
-                            <div class="layui-input-inline">
-                                <input type="tel" name="keyword" autocomplete="off"     placeholder="玩家ID" class="layui-input">
-                            </div>
-                            <button class="layui-btn" id="searchEmailCompany" data-type="reload">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-row" style="margin-bottom : 20px;">
+                                <form class="layui-form">
+                                    <div class="layui-input-inline">
+                                        <input type="tel" id="userId" autocomplete="off" placeholder="玩家ID" class="layui-input">
+                                    </div>
+                                    <button class="layui-btn" id="searchUser" type="button">
                                 <i class="layui-icon" style="font-size: 20px; "></i> 查询
                             </button>
-                        </form>
-                    </div>
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th>用户id</th>
-                            <th>获胜局数</th>
-                            <th>总游戏局数</th>
-                            <th>获胜比例</th>
-                            <td>最常分路</td>
-                            <td>该分路占比</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>34</td>
-                            <td>62</td>
-                            <td>115</td>
-                            <td>53.91%</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
-            <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>玩家英雄列表</h3></div>
-                    <div id="heroList" style="padding-left:15px;padding-right:15px">    
-                         <table class="layui-hide" id="test"></table>
-                    </div>
-                <div class="layui-card-body">
-                </div>
-            </div>
-            </div>
-            <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>玩家分路信息</h3></div>
-                <div class="layui-card-body">
-                    <div id="heroPosition" style="width: 100%; height:400px;">    
+                                </form>
+                            </div>
+                            <table class="layui-table">
+                                <thead>
+                                    <tr>
+                                        <th>用户id</th>
+                                        <th>英雄数量</th>
+                                        <th>获胜局数</th>
+                                        <th>总游戏局数</th>
+                                        <th>获胜比例</th>
+                                        <td>最常分路</td>
+                                        <td>该分路占比</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="heroUserId">34</td>
+                                        <td id="heroNum">62</td>
+                                        <td id="winNum">115</td>
+                                        <td id="sumNum"></td>
+                                        <td id="winRate">53.91%</td>
+                                        <td id="mostUseLabel"></td>
+                                        <td id="labelRate"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>
-            <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header"><h3>玩家胜率top英雄</h3></div>
-                <div class="layui-card-body">
-                    <div id="heroTopUsers" style="width: 100%; height:400px;">  
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th>排名</th>
-                            <th>英雄名称</th>
-                            <th>获胜次数</th>
-                            <th>获胜比例</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>436</td>
-                            <td>221</td>
-                            <td>50.69%</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>436</td>
-                            <td>221</td>
-                            <td>50.69%</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>436</td>
-                            <td>221</td>
-                            <td>50.69%</td>
-                        </tr>                
-                        </tbody>
-                    </table>  
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>玩家英雄列表</h3>
+                        </div>
+                        <div id="heroList" style="padding-left:15px;padding-right:15px">
+                            <table class="layui-hide" id="heroTable"></table>
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>玩家分路信息</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="heroPosition" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>玩家胜率top英雄</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="heroTopUsers" style="width: 100%; height:400px;">
+                                <table class="layui-table">
+                                    <thead>
+                                        <tr>
+                                            <th>排名</th>
+                                            <th>英雄名称</th>
+                                            <th>获胜次数</th>
+                                            <th>获胜比例</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="userRange">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div> 
 
     </div>
-    <script src="./js/common/commonJS.js"></script>  
-     <script type = "text/javascript">
-        var myChart = echarts.init(document.getElementById('heroPosition'), 'westeros');
-        option = {
-            tooltip: {
-                trigger: 'axis',
-            },
-            legend: {
-                x: 'center',
-                data:['使用率','胜率']
-            },
-            radar: [
-                {
-                    indicator: [
-                        {text: '上单', max: 100},
-                        {text: '中单', max: 100},
-                        {text: '打野', max: 100},
-                        {text: 'ADC', max: 100},
-                        {text: '辅助', max: 100},
+    <script src="./js/common/commonJS.js"></script>
+    <script type="text/javascript">
+        function updateHeroList(id) {
+            layui.use('table', function() {
+                var table = layui.table;
+
+                table.render({
+                    elem: '#heroTable',
+                    url: host + '/hero/user/getHeroList?id=' + id,
+                    cols: [
+                        [{
+                            type: 'numbers',
+                            title: '编号'
+                        }, {
+                            field: 'name',
+                            title: '英雄名',
+                            sort: true
+                        }, {
+                            field: 'winNum',
+                            title: '玩家该英雄胜利局数',
+                            sort: true
+                        }, {
+                            field: 'failNum',
+                            title: '玩家该英雄失败局数'
+                        }, {
+                            field: 'userNum',
+                            title: '该英雄用户数',
+                            sort: true
+                        }]
                     ],
-                    center: ['25%','50%'],
-                    radius: 80
-                },
-                {
-                    indicator: [
-                        {text: '上单', max: 100},
-                        {text: '中单', max: 100},
-                        {text: '打野', max: 100},
-                        {text: 'ADC', max: 100},
-                        {text: '辅助', max: 100},
-                    ],
-                    radius: 80,
-                    center: ['75%','50%'],
-                },
-            ],
-            series: [
-                {
-                    type: 'radar',
-                    tooltip: {
-                        trigger: 'item'
-                    },
-                    itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                    data: [
-                        {
-                            value: [60,73,85,40],
-                            name: '使用率'
-                        }
-                    ]
-                },
-                {
-                    type: 'radar',
-                    radarIndex: 1,
-                    data: [
-                        {
-                            value: [85, 90, 90, 95, 95],
-                            name: '胜率'
-                        },
-                    ]
-                },
-            ]
+                    page: true,
+                    loading: true
+                });
+            });
         };
-        myChart.setOption(option);
-    </script>  
-    <script>
-        layui.use('table', function(){
-        var table = layui.table;
-        
-        table.render({
-            elem: '#test'
-            ,url:'/demo/table/user/'
-            ,cols: [[
-            {field:'heronName',title: '英雄名', sort: true}
-            ,{field:'useNum',title: '使用次数', sort: true}
-            ,{field:'useRate', title: '使用率'}
-            ,{field:'winNum', title: '获胜次数', sort: true}
-            ,{field:'winRate', title: '获胜率', sort: true}
-            ,{field:'Oftenposition',  title: '最常分路'}
-            ,{field:'positionRate', title: '分路占比'}
-            ,{field:'positionWinRate',  title: '分路胜率'}
-            ]]
-            ,page: true
+        searchUserInfo(1);
+        updateHeroList(1);
+        $('#searchUser').click(function() {
+            searchUserInfo($('#userId').val());
         });
-        });
+
+        function searchUserInfo(id) {
+            $.get(host + '/hero/user/getUserInfo?id=' + id).done(function(data) {
+                if (data.code != 0) {
+                    layer.alert('该用户不存在', {
+                        icon: 5
+                    });
+                    return;
+                }
+                updateHeroList(id);
+                var sumNum = data.data[0].winNum + data.data[0].failNum
+                var mostUseLabel = 0;
+                var labelUseRate = [];
+                var labelWinRate = [];
+                for (var i = 0; i < 5; i++) {
+                    if (data.data[0].labelUseNum[i] > data.data[0].labelUseNum[mostUseLabel]) {
+                        mostUseLabel = i;
+                    }
+                }
+                data.data[0].labelUseNum[mostUseLabel] += 28;
+                data.data[0].labelWinNum[mostUseLabel] += 14;
+                for (var i = 0; i < 5; i++) {
+                    labelUseRate.push((data.data[0].labelUseNum[i] / sumNum * 100).toFixed(2));
+                    labelWinRate.push((data.data[0].labelWinNum[i] / data.data[0].labelUseNum[i] * 100).toFixed(2));
+                }
+                $('#heroUserId').html(data.data[0].id);
+                $('#heroNum').html(data.data[0].heroNum);
+                $('#winNum').html(data.data[0].winNum);
+                $('#sumNum').html(sumNum);
+                $('#winRate').html((data.data[0].winNum / sumNum * 100).toFixed(2) + '%');
+                $('#mostUseLabel').html(mapTolabel[mostUseLabel]);
+                $('#labelRate').html(((data.data[0].labelUseNum[mostUseLabel] / sumNum) * 100).toFixed(2) + '%');
+
+                echarts.init(document.getElementById('heroPosition'), 'westeros').setOption({
+                    tooltip: {
+                        trigger: 'axis',
+                    },
+                    legend: {
+                        x: 'center',
+                        data: ['使用率', '胜率']
+                    },
+                    radar: [{
+                        indicator: [{
+                            text: '上路',
+                            max: 80
+                        }, {
+                            text: '中路',
+                            max: 80
+                        }, {
+                            text: '下路',
+                            max: 80
+                        }, {
+                            text: '打野',
+                            max: 80
+                        }, {
+                            text: '辅助',
+                            max: 80
+                        }, ],
+                        center: ['25%', '50%'],
+                        radius: 80
+                    }, {
+                        indicator: [{
+                            text: '上路',
+                            max: 100
+                        }, {
+                            text: '中路',
+                            max: 100
+                        }, {
+                            text: '下路',
+                            max: 100
+                        }, {
+                            text: '辅助',
+                            max: 100
+                        }, {
+                            text: '辅助',
+                            max: 100
+                        }, ],
+                        radius: 80,
+                        center: ['75%', '50%'],
+                    }, ],
+                    series: [{
+                        type: 'radar',
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: {
+                            normal: {
+                                areaStyle: {
+                                    type: 'default'
+                                }
+                            }
+                        },
+                        data: [{
+                            value: labelUseRate,
+                            name: '使用率'
+                        }]
+                    }, {
+                        type: 'radar',
+                        radarIndex: 1,
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: {
+                            normal: {
+                                areaStyle: {
+                                    type: 'default'
+                                }
+                            }
+                        },
+                        data: [{
+                            value: labelWinRate,
+                            name: '胜率'
+                        }, ]
+                    }, ]
+                });
+
+                var top3HeroHtml = ''
+                for (var i = 0; i < data.data[0].top3Heroes.length; i++) {
+                    top3HeroHtml += '<tr>';
+                    top3HeroHtml += '<td>' + (i + 1) + '</td>';
+                    top3HeroHtml += '<td>' + data.data[0].top3Heroes[i].name + '</td>';
+                    top3HeroHtml += '<td>' + data.data[0].top3Heroes[i].winNum + '</td>';
+                    top3HeroHtml += '<td>' + (data.data[0].top3Heroes[i].winNum / (data.data[0].top3Heroes[i].winNum + data.data[0].top3Heroes[i].failNum)).toFixed(2) + '</td>';
+                    top3HeroHtml += '</tr>';
+                }
+                $('#userRange').html(top3HeroHtml);
+            });
+        }
     </script>
 
-  
 </body>
+
 </html>
