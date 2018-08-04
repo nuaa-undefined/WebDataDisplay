@@ -178,6 +178,7 @@
     <script src="./js/common/commonJS.js"></script>
     <script type="text/javascript">
         var firstChart = echarts.init(document.getElementById('yearTotalNum'), 'westeros');
+        firstChart.showLoading();
         $.get(host + '/ecommerce/log/giveRate').done(function(data) {
 
             var year_data = [];
@@ -190,6 +191,7 @@
                 fail_count.push(data.data[i].failSum);
                 success_count.push(data.data[i].successSum);
             }
+            firstChart.hideLoading();
             firstChart.setOption({
                 tooltip: {
                     trigger: 'axis'
@@ -224,6 +226,7 @@
     </script>
     <script type="text/javascript">
         var secondChart = echarts.init(document.getElementById('yearTotalConsume'), 'westeros');
+        secondChart.showLoading();
         $.get(host + '/ecommerce/time/yearMoney').done(function(data) {
             var year = []
             var money = []
@@ -231,6 +234,7 @@
                 year.push(data.data[i].year)
                 money.push((data.data[i].moneySum / 10000).toFixed(2))
             }
+            secondChart.hideLoading();
             secondChart.setOption({
                 tooltip: {
                     trigger: 'item',
@@ -307,6 +311,14 @@
         });
     </script>
     <script type="text/javascript">
+        var yearSexChart = echarts.init(document.getElementById('yearSexNum'), 'westeros');
+        var yearNumSexChart = echarts.init(document.getElementById('yearSexNumDistribution'), 'westeros');
+        var yearSexConsumeChart = echarts.init(document.getElementById('yearSexConsume'), 'westeros');
+        var yearSexAvgChart = echarts.init(document.getElementById('yearSexConsumeDistribution'), 'westeros');
+        yearSexChart.showLoading();
+        yearNumSexChart.showLoading();
+        yearSexConsumeChart.showLoading();
+        yearSexAvgChart.showLoading();
         $.get(host + '/ecommerce/time/sexConsumeCount').done(function(data) {
             var years = [];
             var manCount = [];
@@ -338,8 +350,8 @@
             countSum = manCountSum + womanCountSum;
             consumeSum = manConsumeSum + womanConsumeSum;
             userNumSum = manNumSum + womanNumSum;
-
-            echarts.init(document.getElementById('yearSexNum'), 'westeros').setOption({
+            yearSexChart.hideLoading();
+            yearSexChart.setOption({
                 tooltip: {
                     trigger: 'axis'
 
@@ -365,8 +377,8 @@
                     data: womanCount
                 }, ]
             });
-
-            echarts.init(document.getElementById('yearSexNumDistribution'), 'westeros').setOption({
+            yearNumSexChart.hideLoading();
+            yearNumSexChart.setOption({
                 tooltip: {
                     trigger: 'item',
                     formatter: "{b}: <br/>{c} ({d}%)"
@@ -402,7 +414,8 @@
                     }, ]
                 }]
             });
-            echarts.init(document.getElementById('yearSexConsume'), 'westeros').setOption({
+            yearSexConsumeChart.hideLoading();
+            yearSexConsumeChart.setOption({
                 tooltip: {
                     trigger: 'axis'
                 },
@@ -468,7 +481,8 @@
                     }
                 }]
             });
-            echarts.init(document.getElementById('yearSexConsumeDistribution'), 'westeros').setOption({
+            yearSexAvgChart.hideLoading();
+            yearSexAvgChart.setOption({
                 tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b}: <br/>{c} ({d}%)"
@@ -550,6 +564,14 @@
         });
     </script>
     <script type="text/javascript">
+        var monthChart = echarts.init(document.getElementById('mouthTotalNum'), 'westeros');
+        var numScaleChart = echarts.init(document.getElementById('mouthNumScale'), 'westeros');
+        var totalConsumeChart = echarts.init(document.getElementById('mouthTotalConsume'), 'westeros');
+        var consumeScaleChart = echarts.init(document.getElementById('mouthConsumeScale'), 'westeros');
+        monthChart.showLoading();
+        numScaleChart.showLoading();
+        totalConsumeChart.showLoading();
+        consumeScaleChart.showLoading();
         $.get(host + '/ecommerce/time/monthDistribution').done(function(data) {
             var months = []
             var firstSource = []
@@ -581,8 +603,8 @@
                 womanConsumeRate.push((data.data[i].womanMoneySum / sumConsumeMonth * 100).toFixed(2));
                 sumConsumeRate.push((data.data[i].moneySum / sumConsumeMonth * 100).toFixed(2));
             }
-
-            echarts.init(document.getElementById('mouthTotalNum'), 'westeros').setOption({
+            monthChart.hideLoading();
+            monthChart.setOption({
                 dataset: {
                     source: firstSource
                 },
@@ -633,7 +655,8 @@
                     },
                 }]
             });
-            echarts.init(document.getElementById('mouthNumScale'), 'westeros').setOption({
+            numScaleChart.hideLoading();
+            numScaleChart.setOption({
 
                 tooltip: {
                     trigger: 'item',
@@ -670,7 +693,8 @@
                     data: monthCountData
                 }, ]
             });
-            echarts.init(document.getElementById('mouthTotalConsume'), 'westeros').setOption({
+            totalConsumeChart.hideLoading();
+            totalConsumeChart.setOption({
                 tooltip: {
                     trigger: 'axis'
                 },
@@ -752,7 +776,8 @@
                     }
                 }]
             });
-            echarts.init(document.getElementById('mouthConsumeScale'), 'westeros').setOption({
+            consumeScaleChart.hideLoading();
+            consumeScaleChart.setOption({
 
                 tooltip: {
                     trigger: 'axis'

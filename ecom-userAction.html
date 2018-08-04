@@ -89,6 +89,7 @@
     </script>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('cartAbandon'), 'westeros');
+        myChart.showLoading();
         $.get(host + '/ecommerce/log/giveRate').done(function(data) {
             var year_data = [];
             var buy_count = [];
@@ -100,6 +101,7 @@
                 fail_count.push(data.data[i].failSum);
                 give_up_rate.push((data.data[i].giveUpRate * 100).toFixed(2));
             }
+            myChart.hideLoading();
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',

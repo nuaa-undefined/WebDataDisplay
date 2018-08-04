@@ -70,6 +70,14 @@
     <script src="./js/common/commonJS.js"></script>
     <script src="./js/echarts/china.js"></script>
     <script>
+        var mychart = echarts.init(document.getElementById('china-map'), 'westeros');
+        var percentChart = echarts.init(document.getElementById('percent_chart'), 'westeros');
+        var areaYearChart = echarts.init(document.getElementById('area-year-chart'), 'westeros');
+        var areaAvgChart = echarts.init(document.getElementById('area-avg-chart'), 'westeros');
+        mychart.showLoading();
+        percentChart.showLoading();
+        areaYearChart.showLoading();
+        areaAvgChart.showLoading();
         $.get(host + '/ecommerce/region/listRegionData').done(function(data) {
 
             var all_region_data = []
@@ -101,8 +109,7 @@
                 name: '其他',
                 value: (other_region_money / 10000).toFixed(2)
             });
-
-            var mychart = echarts.init(document.getElementById('china-map'), 'westeros');
+            mychart.hideLoading();
             mychart.setOption({
                 title: {
                     text: '消费分布 (万元)',
@@ -189,8 +196,8 @@
                 var dataIndex = params.dataIndex;
                 console.log(params);
             });
-
-            echarts.init(document.getElementById('percent_chart'), 'westeros').setOption({
+            percentChart.hideLoading();
+            percentChart.setOption({
                 title: {
                     text: '',
                     subtext: '',
@@ -221,7 +228,8 @@
                     }
                 }]
             });
-            echarts.init(document.getElementById('area-year-chart'), 'westeros').setOption({
+            areaYearChart.hideLoading();
+            areaYearChart.setOption({
                 title: {
                     text: ''
                 },
@@ -236,11 +244,6 @@
                     right: '4%',
                     bottom: '3%',
                     containLabel: true
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
                 },
                 xAxis: {
                     type: 'category',
@@ -282,7 +285,8 @@
                     data: [150, 232, 201, 154, 190, 330, 410, 500, 600, 700, 720, 800, 750, 790, 810, 880]
                 }]
             });
-            echarts.init(document.getElementById('area-avg-chart'), 'westeros').setOption({
+            areaAvgChart.hideLoading();
+            areaAvgChart.setOption({
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: { // 坐标轴指示器，坐标轴触发有效

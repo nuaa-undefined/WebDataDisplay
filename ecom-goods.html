@@ -18,8 +18,7 @@
                 <cite>商品数据概览</cite>
             </a>
         </span>
-        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);"
-            title="刷新">
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
             <i class="layui-icon" style="line-height:30px">ဂ</i>
         </a>
     </div>
@@ -77,12 +76,15 @@
             </div>
         </div>
         <script type="text/javascript">
-            $.get(host + '/ecommerce/goods/malePurchasedTopGoodsList').done(function (data) {
+            var manTop = echarts.init(document.getElementById('manTopGoods'));
+            var femaleTop = echarts.init(document.getElementById('femaleTopGoods'), 'westeros');
+            manTop.showLoading();
+            femaleTop.showLoading();
+            $.get(host + '/ecommerce/goods/malePurchasedTopGoodsList').done(function(data) {
                 var dataOne = []
                 for (var i = 0; i < data.count; i++) {
                     dataOne.push(data.data[i].maleCounts);
                 }
-                var manTop = echarts.init(document.getElementById('manTopGoods'));
                 var dataAxis = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
                 option = {
                     tooltip: {
@@ -108,29 +110,27 @@
                         },
                         show: true
                     }],
-                    dataZoom: [
-                        {
-                            type: 'inside',
-                        },
-                        {
-                            type: 'slider',
-                            show: true,
-                            handleSize: 20,
-                            height: 10,
-                            fillerColor: new echarts.graphic.LinearGradient(1, 0,
-                                0, 0, [{
-                                    //给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
-                                    //给第一个设置0，第四个设置1，就是垂直渐变
-                                    offset: 0,
-                                    color: '#1eb5e5'
-                                }, {
-                                    offset: 1,
-                                    color: '#516b91'
-                                }]),
-                            backgroundColor: '#ddd',
-                            start: 30,
-                            end: 60,
-                        }],
+                    dataZoom: [{
+                        type: 'inside',
+                    }, {
+                        type: 'slider',
+                        show: true,
+                        handleSize: 20,
+                        height: 10,
+                        fillerColor: new echarts.graphic.LinearGradient(1, 0,
+                            0, 0, [{
+                                //给颜色设置渐变色 前面4个参数，给第一个设置1，第四个设置0 ，就是水平渐变
+                                //给第一个设置0，第四个设置1，就是垂直渐变
+                                offset: 0,
+                                color: '#1eb5e5'
+                            }, {
+                                offset: 1,
+                                color: '#516b91'
+                            }]),
+                        backgroundColor: '#ddd',
+                        start: 30,
+                        end: 60,
+                    }],
                     series: [{
                         type: 'bar',
                         itemStyle: {
@@ -138,26 +138,26 @@
                                 color: ["#59c4e6"]
                             },
                             emphasis: {
-                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1,
-                                    [{
-                                        offset: 0,
-                                        color: '#2378f7'
-                                    }, {
-                                        offset: 0.6,
-                                        color: '#2378f7'
-                                    }, {
-                                        offset: 1,
-                                        color: '#83bff6'
-                                    }])
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 0.6,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 1,
+                                    color: '#83bff6'
+                                }])
                             }
                         },
                         data: dataOne
                     }]
                 };
+                manTop.hideLoading();
                 manTop.setOption(option);
             });
 
-            $.get(host + '/ecommerce/goods/femalePurchasedTopGoodsList').done(function (data) {
+            $.get(host + '/ecommerce/goods/femalePurchasedTopGoodsList').done(function(data) {
                 var dataTwo = []
                 for (var i = 0; i < data.count; i++) {
                     dataTwo.push({
@@ -165,7 +165,6 @@
                         name: data.data[i].id
                     })
                 }
-                var femaleTop = echarts.init(document.getElementById('femaleTopGoods'), 'westeros');
                 moption = {
                     tooltip: {
                         trigger: 'item',
@@ -179,16 +178,17 @@
                         data: dataTwo,
                         animationType: 'scale',
                         animationEasing: 'elasticOut',
-                        animationDelay: function (idx) {
+                        animationDelay: function(idx) {
                             return Math.random() * 200;
                         }
                     }]
                 };
+                femaleTop.hideLoading();
                 femaleTop.setOption(moption);
             });
         </script>
         <script>
-            layui.use('table', function () {
+            layui.use('table', function() {
                 var table = layui.table,
                     form = layui.form;
                 table.render({

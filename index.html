@@ -18,15 +18,10 @@
         </div>
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
-                <a href="javascript:;">admin</a>
-                <dl class="layui-nav-child">
-                    <!-- 二级菜单 -->
-                    <dd><a onclick="">个人信息</a></dd>
-                    <dd><a onclick="">切换帐号</a></dd>
-                    <dd><a href="#">退出</a></dd>
-                </dl>
+                <a id="userAdmin">admin</a>
+                <dl class="layui-nav-child"></dl>
             </li>
-            <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
+            <li class="layui-nav-item to-index"><a id="indexAdmin">前台首页</a></li>
         </ul>
 
     </div>
@@ -38,17 +33,17 @@
             <ul id="nav">
                 <li>
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6b8;</i>
+                        <i class="iconfont">&#xe699;</i>
                         <cite>电商平台数据分析</cite>
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <!-- <li>
                             <a _href="tmp.html">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>运营数据概览</cite>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a _href="ecom-goods.html">
                                 <i class="iconfont">&#xe6a7;</i>
@@ -111,14 +106,14 @@
                 <li>
                     <a href="javascript:;">
                         <i class="iconfont">&#xe726;</i>
-                        <cite>heros数据分析</cite>
+                        <cite>游戏对局数据分析</cite>
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu">
                         <li>
                             <a _href="hero-herosinfo.html">
                                 <i class="iconfont">&#xe6a7;</i>
-                                <cite>英雄信息概述</cite>
+                                <cite>对局信息概览</cite>
                             </a>
                         </li>
                         <li>
@@ -164,4 +159,19 @@
 
     <!-- 统一引用js -->
     <script src="./js/common/commonJS.js"></script>
+    <script>
+        layui.use('layer', function() {
+            var layer = layui.layer;
+            $('#userAdmin').click(function() {
+                layer.msg('别看了，全站只有我一个管理员', {
+                    icon: 5
+                });
+            });
+            $('#indexAdmin').click(function() {
+                layer.msg('前台尚未开发', {
+                    icon: 5
+                });
+            });
+        });
+    </script>
 </body>

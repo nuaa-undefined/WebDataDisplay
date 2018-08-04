@@ -117,9 +117,13 @@
     </div>
     <script src="./js/common/commonJS.js"></script>
     <script type="text/javascript">
-        function updateHeroList(id) {
-            layui.use('table', function() {
-                var table = layui.table;
+        layui.use(['table', 'layer'], function() {
+            var table = layui.table;
+            var layer = layui.layer;
+
+            function updateHeroList(id) {
+
+
 
                 table.render({
                     elem: '#heroTable',
@@ -148,141 +152,143 @@
                     page: true,
                     loading: true
                 });
-            });
-        };
-        searchUserInfo(1);
-        updateHeroList(1);
-        $('#searchUser').click(function() {
-            searchUserInfo($('#userId').val());
-        });
 
-        function searchUserInfo(id) {
-            $.get(host + '/hero/user/getUserInfo?id=' + id).done(function(data) {
-                if (data.code != 0) {
-                    layer.alert('该用户不存在', {
-                        icon: 5
-                    });
-                    return;
-                }
-                updateHeroList(id);
-                var sumNum = data.data[0].winNum + data.data[0].failNum
-                var mostUseLabel = 0;
-                var labelUseRate = [];
-                var labelWinRate = [];
-                for (var i = 0; i < 5; i++) {
-                    if (data.data[0].labelUseNum[i] > data.data[0].labelUseNum[mostUseLabel]) {
-                        mostUseLabel = i;
+            };
+            searchUserInfo(1);
+            updateHeroList(1);
+            $('#searchUser').click(function() {
+                searchUserInfo($('#userId').val());
+            });
+
+            function searchUserInfo(id) {
+                $.get(host + '/hero/user/getUserInfo?id=' + id).done(function(data) {
+                    if (data.code != 0) {
+                        layer.msg('该用户不存在', {
+                            icon: 0
+                        });
+                        return;
                     }
-                }
-                data.data[0].labelUseNum[mostUseLabel] += 28;
-                data.data[0].labelWinNum[mostUseLabel] += 14;
-                for (var i = 0; i < 5; i++) {
-                    labelUseRate.push((data.data[0].labelUseNum[i] / sumNum * 100).toFixed(2));
-                    labelWinRate.push((data.data[0].labelWinNum[i] / data.data[0].labelUseNum[i] * 100).toFixed(2));
-                }
-                $('#heroUserId').html(data.data[0].id);
-                $('#heroNum').html(data.data[0].heroNum);
-                $('#winNum').html(data.data[0].winNum);
-                $('#sumNum').html(sumNum);
-                $('#winRate').html((data.data[0].winNum / sumNum * 100).toFixed(2) + '%');
-                $('#mostUseLabel').html(mapTolabel[mostUseLabel]);
-                $('#labelRate').html(((data.data[0].labelUseNum[mostUseLabel] / sumNum) * 100).toFixed(2) + '%');
+                    layer.msg('用户信息获取成功');
+                    updateHeroList(id);
+                    var sumNum = data.data[0].winNum + data.data[0].failNum
+                    var mostUseLabel = 0;
+                    var labelUseRate = [];
+                    var labelWinRate = [];
+                    for (var i = 0; i < 5; i++) {
+                        if (data.data[0].labelUseNum[i] > data.data[0].labelUseNum[mostUseLabel]) {
+                            mostUseLabel = i;
+                        }
+                    }
+                    data.data[0].labelUseNum[mostUseLabel] += 28;
+                    data.data[0].labelWinNum[mostUseLabel] += 14;
+                    for (var i = 0; i < 5; i++) {
+                        labelUseRate.push((data.data[0].labelUseNum[i] / sumNum * 100).toFixed(2));
+                        labelWinRate.push((data.data[0].labelWinNum[i] / data.data[0].labelUseNum[i] * 100).toFixed(2));
+                    }
+                    $('#heroUserId').html(data.data[0].id);
+                    $('#heroNum').html(data.data[0].heroNum);
+                    $('#winNum').html(data.data[0].winNum);
+                    $('#sumNum').html(sumNum);
+                    $('#winRate').html((data.data[0].winNum / sumNum * 100).toFixed(2) + '%');
+                    $('#mostUseLabel').html(mapTolabel[mostUseLabel]);
+                    $('#labelRate').html(((data.data[0].labelUseNum[mostUseLabel] / sumNum) * 100).toFixed(2) + '%');
 
-                echarts.init(document.getElementById('heroPosition'), 'westeros').setOption({
-                    tooltip: {
-                        trigger: 'axis',
-                    },
-                    legend: {
-                        x: 'center',
-                        data: ['使用率', '胜率']
-                    },
-                    radar: [{
-                        indicator: [{
-                            text: '上路',
-                            max: 80
-                        }, {
-                            text: '中路',
-                            max: 80
-                        }, {
-                            text: '下路',
-                            max: 80
-                        }, {
-                            text: '打野',
-                            max: 80
-                        }, {
-                            text: '辅助',
-                            max: 80
-                        }, ],
-                        center: ['25%', '50%'],
-                        radius: 80
-                    }, {
-                        indicator: [{
-                            text: '上路',
-                            max: 100
-                        }, {
-                            text: '中路',
-                            max: 100
-                        }, {
-                            text: '下路',
-                            max: 100
-                        }, {
-                            text: '辅助',
-                            max: 100
-                        }, {
-                            text: '辅助',
-                            max: 100
-                        }, ],
-                        radius: 80,
-                        center: ['75%', '50%'],
-                    }, ],
-                    series: [{
-                        type: 'radar',
+                    echarts.init(document.getElementById('heroPosition'), 'westeros').setOption({
                         tooltip: {
-                            trigger: 'item'
+                            trigger: 'axis',
                         },
-                        itemStyle: {
-                            normal: {
-                                areaStyle: {
-                                    type: 'default'
+                        legend: {
+                            x: 'center',
+                            data: ['使用率', '胜率']
+                        },
+                        radar: [{
+                            indicator: [{
+                                text: '上路',
+                                max: 80
+                            }, {
+                                text: '中路',
+                                max: 80
+                            }, {
+                                text: '下路',
+                                max: 80
+                            }, {
+                                text: '打野',
+                                max: 80
+                            }, {
+                                text: '辅助',
+                                max: 80
+                            }, ],
+                            center: ['25%', '50%'],
+                            radius: 80
+                        }, {
+                            indicator: [{
+                                text: '上路',
+                                max: 100
+                            }, {
+                                text: '中路',
+                                max: 100
+                            }, {
+                                text: '下路',
+                                max: 100
+                            }, {
+                                text: '辅助',
+                                max: 100
+                            }, {
+                                text: '辅助',
+                                max: 100
+                            }, ],
+                            radius: 80,
+                            center: ['75%', '50%'],
+                        }, ],
+                        series: [{
+                            type: 'radar',
+                            tooltip: {
+                                trigger: 'item'
+                            },
+                            itemStyle: {
+                                normal: {
+                                    areaStyle: {
+                                        type: 'default'
+                                    }
                                 }
-                            }
-                        },
-                        data: [{
-                            value: labelUseRate,
-                            name: '使用率'
-                        }]
-                    }, {
-                        type: 'radar',
-                        radarIndex: 1,
-                        tooltip: {
-                            trigger: 'item'
-                        },
-                        itemStyle: {
-                            normal: {
-                                areaStyle: {
-                                    type: 'default'
+                            },
+                            data: [{
+                                value: labelUseRate,
+                                name: '使用率'
+                            }]
+                        }, {
+                            type: 'radar',
+                            radarIndex: 1,
+                            tooltip: {
+                                trigger: 'item'
+                            },
+                            itemStyle: {
+                                normal: {
+                                    areaStyle: {
+                                        type: 'default'
+                                    }
                                 }
-                            }
-                        },
-                        data: [{
-                            value: labelWinRate,
-                            name: '胜率'
+                            },
+                            data: [{
+                                value: labelWinRate,
+                                name: '胜率'
+                            }, ]
                         }, ]
-                    }, ]
-                });
+                    });
 
-                var top3HeroHtml = ''
-                for (var i = 0; i < data.data[0].top3Heroes.length; i++) {
-                    top3HeroHtml += '<tr>';
-                    top3HeroHtml += '<td>' + (i + 1) + '</td>';
-                    top3HeroHtml += '<td>' + data.data[0].top3Heroes[i].name + '</td>';
-                    top3HeroHtml += '<td>' + data.data[0].top3Heroes[i].winNum + '</td>';
-                    top3HeroHtml += '<td>' + (data.data[0].top3Heroes[i].winNum / (data.data[0].top3Heroes[i].winNum + data.data[0].top3Heroes[i].failNum)).toFixed(2) + '</td>';
-                    top3HeroHtml += '</tr>';
-                }
-                $('#userRange').html(top3HeroHtml);
-            });
-        }
+                    var top3HeroHtml = ''
+                    for (var i = 0; i < data.data[0].top3Heroes.length; i++) {
+                        top3HeroHtml += '<tr>';
+                        top3HeroHtml += '<td>' + (i + 1) + '</td>';
+                        top3HeroHtml += '<td>' + data.data[0].top3Heroes[i].name + '</td>';
+                        top3HeroHtml += '<td>' + data.data[0].top3Heroes[i].winNum + '</td>';
+                        top3HeroHtml += '<td>' + (data.data[0].top3Heroes[i].winNum / (data.data[0].top3Heroes[i].winNum + data.data[0].top3Heroes[i].failNum)).toFixed(2) + '</td>';
+                        top3HeroHtml += '</tr>';
+                    }
+                    $('#userRange').html(top3HeroHtml);
+                });
+            }
+        });
     </script>
 
 </body>
