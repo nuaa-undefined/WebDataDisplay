@@ -148,18 +148,18 @@
                     //            calculable : true,//颜色呈条状
                     text: ['高', '低'] // 文本，默认为数值文本
                 },
-                toolbox: { //工具栏
-                    show: true,
-                    orient: 'vertical', //工具栏 icon 的布局朝向
-                    x: 'right',
-                    y: 'bottom',
-                    itemSize: 18,
-                    feature: { //各工具配置项。
-                        mark: {
-                            show: true
-                        }
-                    }
-                },
+                // toolbox: { //工具栏
+                //     show: true,
+                //     orient: 'vertical', //工具栏 icon 的布局朝向
+                //     x: 'right',
+                //     y: 'bottom',
+                //     itemSize: 18,
+                //     feature: { //各工具配置项。
+                //         mark: {
+                //             show: true
+                //         }
+                //     }
+                // },
                 series: [{
                     name: '消费总额',
                     type: 'map',
@@ -202,15 +202,15 @@
                 },
                 legend: {
                     orient: 'vertical',
-                    left: 'left',
-                    y: '20%',
+                    left: '3%',
+                    y: '3%',
                     data: top6_region
                 },
                 series: [{
                     name: '消费占比',
                     type: 'pie',
                     radius: '55%',
-                    center: ['50%', '50%'],
+                    center: ['50%', '47%'],
                     data: top6_region_data,
                     itemStyle: {
                         emphasis: {
@@ -229,18 +229,14 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+                    data: ['北京市', '上海市', '江苏省', '浙江省', '福建省','天津市']
                 },
                 grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
+                    // left: '3%',
+                    // right: '4%',
+                    // bottom: '5%',
+                    y:70,
                     containLabel: true
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
                 },
                 xAxis: {
                     type: 'category',
@@ -292,17 +288,18 @@
                 grid: {
                     left: '3%',
                     right: '4%',
-                    bottom: '3%',
+                    // bottom: '3%',
+                    y:70,
                     containLabel: true
                 },
                 xAxis: [{
                     data: region
                 }],
                 yAxis: [{
-                    type: 'value'
+                    type: 'value',
+                    name:'元',
                 }],
                 series: [{
-                    name: '直接访问',
                     type: 'bar',
                     barWidth: '60%',
                     data: avg_consume
