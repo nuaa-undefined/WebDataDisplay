@@ -97,7 +97,7 @@
                 function updateGoodsInfoByGoodsName(goodsName) {
                     $.get(host + '/ecommerce/goods/goodsInfoList?id=' + goodsName).done(function (data) {
                         if (data.code != 0) {
-                            layer.alert('该用户不存在', {
+                            layer.alert('该商品不存在', {
                                 icon: 5
                             });
                             return;
