@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,64 +8,115 @@
     <script src="./js/common/commonHead.js"></script>
     <title>商品信息查询</title>
 </head>
+
 <body>
     <div class="x-nav">
-      <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">电商平台数据分析</a>
-        <a><cite>商品信息查询</cite></a>
-      </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">电商平台数据分析</a>
+            <a>
+                <cite>商品信息查询</cite>
+            </a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);"
+            title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
+        </a>
     </div>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">
             <p>&nbsp;&nbsp;&nbsp;在这里，你可以通过检索商品id，展示该商品的基本信息，包括上市季度，销售情况，成交金额等</p>
         </blockquote>
         <div style="padding: 20px; background-color: #F2F2F2;">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="layui-row" style="margin-bottom : 20px;">
-                        <form class="layui-form">
-                            <div class="layui-input-inline">
-                                <input type="tel" name="keyword" autocomplete="off"     placeholder="商品ID" class="layui-input">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-row" style="margin-bottom : 20px;">
+                                <form class="layui-form">
+                                    <div class="layui-input-inline">
+                                        <input type="tel" id="goodsName" name="keyword" autocomplete="off" placeholder="商品ID" class="layui-input">
+                                    </div>
+                                    <button class="layui-btn" id="goodsSearchBtn" type="button">
+                                        <i class="layui-icon" style="font-size: 20px; "></i> 查询
+                                    </button>
+                                </form>
                             </div>
-                            <button class="layui-btn" id="searchEmailCompany" data-type="reload">
-                                <i class="layui-icon" style="font-size: 20px; "></i> 查询
-                            </button>
-                        </form>
+                            <table class="layui-table">
+                                <thead>
+                                    <tr>
+                                        <th>商品id</th>
+                                        <td>上市季度</td>
+                                        <td>销售最好地区</td>
+                                        <th>男性购买次数（占比）</th>
+                                        <td>女性购买次数（占比）</td>
+                                        <th>成功交易次数</th>
+                                        <th>总交易次数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span id="id"></span>
+                                        </td>
+                                        <td>
+                                            <span id="season"></span>
+                                        </td>
+                                        <td>
+                                            <span id="highestRegion"></span>
+                                        </td>
+                                        <td>
+                                            <span id="maleRate"></span>
+                                        </td>
+                                        <td>
+                                            <span id="femaleRate"></span>
+                                        </td>
+                                        <td>
+                                            <span id="succussCounts"></span>
+                                        </td>
+
+                                        <td>
+                                            <span id="totalCounts"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th>商品id</th>
-                            <td>上市季度</td>
-                            <td>销售最好地区</td>
-                            <th>成功交易次数</th>
-                            <th>男性购买次数（占比）</th>
-                            <td>女性购买次数（占比）</td>
-                            <th>总交易次数</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>342312454567-2345</td>
-                            <td>夏</td>
-                            <td>北京</td>
-                            <td>53.91%</td>
-                            <td>1000（33.3%）</td>
-                            <td>2000（66.6%）</td>
-                            <td>3000</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-            </div>
+            <script src="./js/common/commonJS.js"></script>
+            <script type="text/javascript">
+                updateGoodsInfoByGoodsName('41580180341010211A1001');
 
-    </div>
-    <script src="./js/common/commonJS.js"></script>  
+                $('#goodsSearchBtn').click(function () {
+                    var goodsName = $('#goodsName').val();
+                    updateGoodsInfoByGoodsName(goodsName);
+                });
+
+                function updateGoodsInfoByGoodsName(goodsName) {
+                    $.get(host + '/ecommerce/goods/goodsInfoList?id=' + goodsName).done(function (data) {
+                        if (data.code != 0) {
+                            layer.alert('该用户不存在', {
+                                icon: 5
+                            });
+                            return;
+                        }
+                        $('#id').html(data.data[0].id);
+                        switch (data.data[0].season) {
+                            case 1: $('#season').html("春"); break;
+                            case 2: $('#season').html("夏"); break;
+                            case 3: $('#season').html("秋"); break;
+                            case 4: $('#season').html("冬"); break;
+                        }
+                        $('#highestRegion').html( data.data[0].highestRegion=="110000"?"北京":"其他地区");
+                        $('#succussCounts').html(data.data[0].totalCounts - data.data[0].failCounts);
+                        $('#maleRate').html((data.data[0].maleRate*100).toFixed(2)+ '%');
+                        $('#femaleRate').html((data.data[0].femaleRate*100).toFixed(2)+ '%');
+                        $('#totalCounts').html(data.data[0].totalCounts);
+                    });
+                }
+            </script>
 </body>
+
 </html>

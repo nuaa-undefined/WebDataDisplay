@@ -37,7 +37,7 @@
                                     <div class="layui-input-inline">
                                         <input type="tel" id="userName" name="keyword" autocomplete="off" placeholder="用户ID" class="layui-input">
                                     </div>
-                                    <button class="layui-btn" id="userSearchBtn" data-type="reload">
+                                    <button class="layui-btn" id="userSearchBtn" type="button">
                                         <i class="layui-icon" style="font-size: 20px; "></i> 查询
                                     </button>
                                 </form>
@@ -80,19 +80,29 @@
                     </div>
                 </div>
                 <script src="./js/common/commonJS.js"></script>
-
                 <script type="text/javascript">
-                    updateHeroInfoByHeroName('0001eaef-3f50-4f9a-9158-b9f096e64028');
+                    updateUserInfoByUserName('0001eaef-3f50-4f9a-9158-b9f096e64028');
             
                     $('#userSearchBtn').click(function() {
                         var userName = $('#userName').val();
-                        updateHeroInfoByHeroName(userName);
+                        updateUserInfoByUserName(userName);
                     });
             
-                    function updateHeroInfoByHeroName(userName) {
-                        $.get(host + '/hero/heroes/getHeroInfo?name=' + heroName).done(function(data) {
-                            
-                        }
+                    function updateUserInfoByUserName(userName) {
+                        $.get(host + '/game/user/userInfoList?id=' + userName).done(function(data) {
+                            if(data.code != 0){
+                                layer.alert('该用户不存在', {
+                                    icon: 5
+                                });
+                                return;
+                            }
+                            $('#id').html(data.data[0].id);
+                            $('#os').html(data.data[0].os);
+                            $('#firstTime').html(data.data[0].firstTime);
+                            $('#finalTime').html(data.data[0].finalTime);
+                            $('#totalTime').html(data.data[0].totalTime);
+                            $('#mainPlayTime').html(data.data[0].mainPlayTime);   
+                        });
                     }
                 </script>
 </body>
