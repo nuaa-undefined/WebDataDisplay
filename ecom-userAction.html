@@ -53,6 +53,22 @@
                             <h3>数据分析</h3>
                         </div>
                         <div id="userConsumeAna" style="width: 100%; height:400px;">
+                            <table class="layui-table">
+                                <tbody>
+                                    <tr>
+                                        <td>用户总消费额主要集中在1000元到100000元</td>
+                                    </tr>
+                                    <tr>
+                                        <td>平均消费则集中在100元到999元和10000元以上两个区间</td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户总消费额主要集中在1000元到100000元</td>
+                                    </tr>
+                                    <tr>
+                                        <td>所以消费群体有限，商品的丰富程度也有限</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="layui-card-body">
                         </div>
@@ -60,7 +76,7 @@
                 </div>
             </div>
             <div class="layui-row layui-col-space15">
-                <div class="layui-col-md8">
+                <!-- <div class="layui-col-md8">
                     <div class="layui-card">
                         <div class="layui-card-header">
                             <h3>购物车放弃率</h3>
@@ -81,7 +97,7 @@
                         <div class="layui-card-body">
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md6">
@@ -127,10 +143,10 @@
         {{# if(d.sex === 1){ }} 男 {{# } else { }} 女 {{# } }}
     </script>
     <script type="text/javascript">
-        var myChart = echarts.init(document.getElementById('cartAbandon'), 'westeros');
+        // var myChart = echarts.init(document.getElementById('cartAbandon'), 'westeros');
         var sumConsumeChart = echarts.init(document.getElementById('userConsumeChart'), 'westeros');
         var avgConsumeChart = echarts.init(document.getElementById('userAvgConsumeChart'), 'westeros');
-        myChart.showLoading();
+        // myChart.showLoading();
         sumConsumeChart.showLoading();
         avgConsumeChart.showLoading();
         $.get(host + '/ecommerce/user/getUserConsumeRate').done(function(data) {
@@ -212,58 +228,58 @@
                 fail_count.push(data.data[i].failSum);
                 give_up_rate.push((data.data[i].giveUpRate * 100).toFixed(2));
             }
-            myChart.hideLoading();
-            myChart.setOption({
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        crossStyle: {
-                            color: '#999'
-                        }
-                    }
-                },
-                legend: {
-                    data: ['总交易次数', '总失败次数', '购物车放弃率']
-                },
-                grid: {
-                    x: 100,
-                    y: 70,
-                },
-                xAxis: [{
-                    type: 'category',
-                    data: year_data,
-                    axisPointer: {
-                        type: 'shadow'
-                    }
-                }],
-                yAxis: [{
-                    type: 'value',
-                    name: '交易次数',
-                }, {
-                    type: 'value',
-                    name: '放弃率',
-                    min: 0,
-                    max: 100,
-                    axisLabel: {
-                        formatter: '{value} %'
-                    }
-                }],
-                series: [{
-                    name: '总交易次数',
-                    type: 'line',
-                    data: buy_count
-                }, {
-                    name: '购物车放弃率',
-                    type: 'bar',
-                    yAxisIndex: 1,
-                    data: give_up_rate
-                }, {
-                    name: '总失败次数',
-                    type: 'line',
-                    data: fail_count
-                }]
-            });
+            // myChart.hideLoading();
+            // myChart.setOption({
+            //     tooltip: {
+            //         trigger: 'axis',
+            //         axisPointer: {
+            //             type: 'cross',
+            //             crossStyle: {
+            //                 color: '#999'
+            //             }
+            //         }
+            //     },
+            //     legend: {
+            //         data: ['总交易次数', '总失败次数', '购物车放弃率']
+            //     },
+            //     grid: {
+            //         x: 100,
+            //         y: 70,
+            //     },
+            //     xAxis: [{
+            //         type: 'category',
+            //         data: year_data,
+            //         axisPointer: {
+            //             type: 'shadow'
+            //         }
+            //     }],
+            //     yAxis: [{
+            //         type: 'value',
+            //         name: '交易次数',
+            //     }, {
+            //         type: 'value',
+            //         name: '放弃率',
+            //         min: 0,
+            //         max: 100,
+            //         axisLabel: {
+            //             formatter: '{value} %'
+            //         }
+            //     }],
+            //     series: [{
+            //         name: '总交易次数',
+            //         type: 'line',
+            //         data: buy_count
+            //     }, {
+            //         name: '购物车放弃率',
+            //         type: 'bar',
+            //         yAxisIndex: 1,
+            //         data: give_up_rate
+            //     }, {
+            //         name: '总失败次数',
+            //         type: 'line',
+            //         data: fail_count
+            //     }]
+            // });
         });
     </script>
     <!-- 表格 -->
