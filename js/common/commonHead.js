@@ -6,5 +6,5 @@ document.write('<meta http-equiv="Cache-Control" content="no-siteapp" />');
 document.write('<link rel="shortcut icon" href="./images/code.png" type="image/x-icon" />');
 document.write('<link rel="stylesheet" href="./css/font.css">');
 document.write('<link rel="stylesheet" href="./css/xadmin.css">');
-// var host = "http://localhost:8080/"
-var host = "http://tomax.xin/big-data/";
+var host = "http://localhost:8080/"
+    // var host = "http://tomax.xin/big-data/";

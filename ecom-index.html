@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/common/commonHead.js"></script>
+    <title>用户行为信息展示</title>
+</head>
+
+<body>
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">电商平台数据分析</a>
+            <a>
+                <cite>运营数据概览</cite>
+            </a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
+        </a>
+    </div>
+    <div class="x-body layui-anim layui-anim-up">
+        <fieldset class="layui-elem-field">
+            <legend>平台信息提要</legend>
+            <div class="layui-field-box">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 90px;">
+                                <div carousel-item="" id='info-card'>
+                                    <ul class="layui-row layui-col-space10 layui-this">
+                                        <li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>用户总数</h3>
+                                                <p>
+                                                    <cite id="userNum"></cite>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>活跃用户数量</h3>
+                                                <p>
+                                                    <cite id="activeUserNum"></cite>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>商品总数</h3>
+                                                <p>
+                                                    <cite id="goodNum"></cite>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>累计交易次数</h3>
+                                                <p>
+                                                    <cite id="consumeNum"></cite>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>交易成功率</h3>
+                                                <p>
+                                                    <cite id="successRate"></cite>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="layui-col-xs2">
+                                            <a href="javascript:;" class="x-admin-backlog-body">
+                                                <h3>累计交易额</h3>
+                                                <p>
+                                                    <cite id="sumMoney"></cite>
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>数据变化</legend>
+            <div class="layui-field-box">
+                <p>&nbsp;&nbsp;&nbsp;这里，你将看见一些年度变化趋势</p>
+                <br>
+            </div>
+        </fieldset>
+        <div class="layui-field-box">
+            <div style="padding: 20px; background-color: #F2F2F2;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>用户数量变化</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <div id="userCount" style="width: 100%; height:400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/common/commonJS.js"></script>
+    <script>
+        $.get(host + '/ecommerce/index/info').done(function(data) {
+            $('#userNum').html(data.userNum);
+            $('#activeUserNum').html(data.activeUserNum);
+            $('#goodNum').html(data.goodNum);
+            $('#consumeNum').html(data.consumeNum);
+            $('#successRate').html((data.successRate * 100).toFixed(2) + '%');
+            $('#sumMoney').html((data.sumMoney / 10000).toFixed(2) + '万元');
+        });
+
+        var userCountChart = echarts.init(document.getElementById('userCount'), 'westeros');
+        userCountChart.showLoading();
+        $.get(host + '/ecommerce/index/addUser').done(function(data) {
+            var year_data = [];
+            var add_user = [];
+            var consume_user = [];
+            for (var i = 0; i < data.count; i++) {
+                year_data.push(data.data[i].year);
+                add_user.push(data.data[i].newUser);
+                consume_user.push(data.data[i].consumeUserNum);
+            }
+            userCountChart.hideLoading();
+            userCountChart.setOption({
+                tooltip: {
+                    trigger: 'axis'
+
+                },
+                legend: {
+                    data: ['消费用户数', '新增用户数']
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: year_data
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '消费用户数',
+                    type: 'line',
+                    data: consume_user
+                }, {
+                    name: '新增用户数',
+                    type: 'line',
+                    data: add_user
+                }]
+            });
+        });
+    </script>
+</body>
+
+</html>

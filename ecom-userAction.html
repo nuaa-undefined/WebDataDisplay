@@ -25,26 +25,41 @@
         </blockquote>
         <div style="padding: 20px; background-color: #F2F2F2;">
             <div class="layui-row layui-col-space15">
-                <div class="layui-col-md6">
+                <div class="layui-col-md4">
                     <div class="layui-card">
                         <div class="layui-card-header">
-                            <h3>用户消费总额top10</h3>
+                            <h3>用户消费分布</h3>
                         </div>
                         <div class="layui-card-body">
-                            <table class="layui-table" id="user_money_top"></table>
+                            <div id="userConsumeChart" style="width: 100%; height:400px;">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-md6">
+                <div class="layui-col-md4">
                     <div class="layui-card">
                         <div class="layui-card-header">
-                            <h3>单笔消费top10</h3>
+                            <h3>用户平均消费分布</h3>
                         </div>
                         <div class="layui-card-body">
-                            <table class="layui-table" id="max_money_top"></table>
+                            <div id="userAvgConsumeChart" style="width: 100%; height:400px;">
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="layui-col-md4">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>数据分析</h3>
+                        </div>
+                        <div id="userConsumeAna" style="width: 100%; height:400px;">
+                        </div>
+                        <div class="layui-card-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15">
                 <div class="layui-col-md8">
                     <div class="layui-card">
                         <div class="layui-card-header">
@@ -67,6 +82,30 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>用户消费总额top10</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <table class="layui-table" id="user_money_top"></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>单笔消费top10</h3>
+                        </div>
+                        <div class="layui-card-body">
+                            <table class="layui-table" id="max_money_top"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-header">
@@ -89,7 +128,79 @@
     </script>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('cartAbandon'), 'westeros');
+        var sumConsumeChart = echarts.init(document.getElementById('userConsumeChart'), 'westeros');
+        var avgConsumeChart = echarts.init(document.getElementById('userAvgConsumeChart'), 'westeros');
         myChart.showLoading();
+        sumConsumeChart.showLoading();
+        avgConsumeChart.showLoading();
+        $.get(host + '/ecommerce/user/getUserConsumeRate').done(function(data) {
+            var xSumData = [];
+            var xAvgData = [];
+            var xSumName = [];
+            var xAvgName = [];
+            for (var i = 0; i < 4; i++) {
+                xSumData.push(data.data[i]);
+                xSumName.push(data.data[i].name);
+            }
+            for (var i = 4; i < data.count; i++) {
+                xAvgData.push(data.data[i]);
+                xAvgName.push(data.data[i].name);
+            }
+
+            sumConsumeChart.hideLoading();
+            avgConsumeChart.hideLoading();
+            sumConsumeChart.setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: xSumName
+                },
+                series: [{
+                    name: '用户数比例',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '45%'],
+                    data: xSumData,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            });
+            avgConsumeChart.setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: xAvgName
+                },
+                series: [{
+                    name: '用户数比例',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '45%'],
+                    data: xAvgData,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            });
+        });
+
         $.get(host + '/ecommerce/log/giveRate').done(function(data) {
             var year_data = [];
             var buy_count = [];
