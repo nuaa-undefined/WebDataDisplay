@@ -18,7 +18,8 @@
                 <cite>用户行为信息展示</cite>
             </a>
         </span>
-        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);"
+            title="刷新">
             <i class="layui-icon" style="line-height:30px">ဂ</i>
         </a>
     </div>
@@ -138,7 +139,7 @@
         </div>
     </div>
     <script type="text/javascript">
-        $.get(host + '/game/user/userBehaviorInfo').done(function(data) {
+        $.get(host + '/game/user/userBehaviorInfo').done(function (data) {
             $('#averActiveUser').html(data.data[0].averActiveUser);
             $('#highestTime').html(data.data[0].highestTime);
             $('#allUsers').html(data.data[0].allUsers);
@@ -146,13 +147,13 @@
             $('#highestLoginDay').html(data.data[0].highestLoginDay);
             $('#highestLoginDayNum').html(data.data[0].highestLoginDayNum);
         });
-        var dayLoginchart = echarts.init(document.getElementById('DayLogin'), 'westeros');
-        dayLoginchart.showLoading();
-        $.get(host + '/game/user/dayLoginUserNumList').done(function(data) {
+
+        $.get(host + '/game/user/dayLoginUserNumList').done(function (data) {
             var all_login_day = []
             for (var i = 0; i < data.count; i++) {
                 all_login_day.push(data.data[i].num);
             }
+            var dayLoginchart = echarts.init(document.getElementById('DayLogin'), 'westeros');
             var option = {
                 tooltip: {
                     trigger: 'axis'
@@ -174,19 +175,19 @@
                 yAxis: {
                     type: 'value'
                 },
-                series: [{
-                    name: '每天的登录用户数',
-                    type: 'line',
-                    stack: '总量',
-                    data: all_login_day
-                }]
+                series: [
+                    {
+                        name: '每天的登录用户数',
+                        type: 'line',
+                        stack: '总量',
+                        data: all_login_day
+                    }
+                ]
             };
-            dayLoginchart.hideLoading();
             dayLoginchart.setOption(option);
         });
-        var myChart = echarts.init(document.getElementById('EachTimeUser'), 'westeros');
-        myChart.showLoading();
-        $.get(host + '/game/user/mainPlayTimeDistributionList').done(function(data) {
+
+        $.get(host + '/game/user/mainPlayTimeDistributionList').done(function (data) {
             var all_login_day = []
             for (var i = 0; i < data.count; i++) {
                 all_login_day.push({
@@ -194,6 +195,8 @@
                     name: data.data[i].time
                 });
             }
+            var myChart = echarts.init(document.getElementById('EachTimeUser'), 'westeros');
+
             var option = {
                 tooltip: {
                     trigger: 'item',
@@ -205,31 +208,33 @@
                     // data: ['dawn(0~6时)', 'morning(6~12时)', 'afternoon(12~18时)', 'evening(18~24时)']
                     data: ['dawn', 'morning', 'afternoon', 'evening']
                 },
-                series: [{
-                    name: '用户数比例',
-                    type: 'pie',
-                    radius: '55%',
-                    center: ['50%', '45%'],
-                    data: all_login_day,
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                series: [
+                    {
+                        name: '用户数比例',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '45%'],
+                        data: all_login_day,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
                         }
                     }
-                }]
+                ]
             };
-            myChart.hideLoading();
             myChart.setOption(option);
         });
-        var mchart = echarts.init(document.getElementById('EachDayLogin'), 'westeros');
-        mchart.hideLoading();
-        $.get(host + '/game/user/dayLoginTimeNumList').done(function(data) {
+
+        $.get(host + '/game/user/dayLoginTimeNumList').done(function (data) {
             var all_login_day = []
             for (var i = 0; i < data.count; i++) {
                 all_login_day.push(data.data[i].num);
             }
+            var mchart = echarts.init(document.getElementById('EachDayLogin'), 'westeros');
+
             var moption = {
                 tooltip: {
                     trigger: 'axis'
@@ -251,19 +256,20 @@
                 yAxis: {
                     type: 'value'
                 },
-                series: [{
-                    name: '不同登陆天数用户',
-                    type: 'line',
-                    stack: '总量',
-                    data: all_login_day
-                }]
+                series: [
+                    {
+                        name: '不同登陆天数用户',
+                        type: 'line',
+                        stack: '总量',
+                        data: all_login_day
+                    }
+                ]
             };
-            mchart.hideLoading();
             mchart.setOption(moption);
         });
     </script>
     <script>
-        layui.use('table', function() {
+        layui.use('table', function () {
             var table = layui.table,
                 form = layui.form;
             table.render({
@@ -288,5 +294,4 @@
         });
     </script>
 </body>
-
 </html>
